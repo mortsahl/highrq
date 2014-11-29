@@ -2,11 +2,14 @@ package highrq.core.models.entities.enums;
 
 public enum Race {
     WHITE("White"),
-    BLACK("Black"),
-    HISPANIC("HISPANIC"),
+    BLACK("African American"),
+    HISPANIC("Hispanic"),
     ASIAN("Asian"),
-    AMERINDIAN("AMERINDIAN"),
-    POLYNEASIAN("POLYNEASIAN"),
+    AMERINDIAN("American Indian"),
+    POLYNESIAN("Polynesian"),
+    MIDEAST("Middle Eastern"),
+    ARABIC("Arabic"),
+    MIXED("Nixed"),
     OTHER("Other");
 
     private String value;
