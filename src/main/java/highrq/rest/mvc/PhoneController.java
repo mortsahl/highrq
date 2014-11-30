@@ -6,6 +6,7 @@ import highrq.core.services.exceptions.PhoneExistsException;
 import highrq.rest.exceptions.ConflictException;
 import highrq.rest.resources.PhoneResource;
 import highrq.rest.resources.asm.PhoneResourceAsm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class PhoneController {
 
   private PhoneService service;
 
+  @Autowired
   public PhoneController(PhoneService phoneService) {
     this.service = phoneService;
   }
