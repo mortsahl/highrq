@@ -2,8 +2,8 @@ package highrq.core.services.impl;
 
 import highrq.core.models.entities.Account;
 import highrq.core.models.entities.Blog;
-import highrq.core.repositories.AccountRepo;
-import highrq.core.repositories.BlogRepo;
+import highrq.core.repositories.AccountDAO;
+import highrq.core.repositories.BlogDAO;
 import highrq.core.services.AccountService;
 import highrq.core.services.exceptions.AccountDoesNotExistException;
 import highrq.core.services.exceptions.AccountExistsException;
@@ -19,42 +19,42 @@ import org.springframework.transaction.annotation.Transactional;
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
-    private AccountRepo accountRepo;
+    private AccountDAO accountDAO;
 
     @Autowired
-    private BlogRepo blogRepo;
+    private BlogDAO blogDAO;
 
     @Override
     public Account findAccount(Long id) {
-        return accountRepo.findAccount(id);
+        return accountDAO.findAccount(id);
     }
 
     @Override
     public Account createAccount(Account data) {
-        Account account = accountRepo.findAccountByName(data.getName());
+        Account account = accountDAO.findAccountByName(data.getName());
         if(account != null)
         {
             throw new AccountExistsException();
         }
-        return accountRepo.createAccount(data);
+        return accountDAO.createAccount(data);
     }
 
     @Override
     public Blog createBlog(Long accountId, Blog data) {
-        Blog blogSameTitle = blogRepo.findBlogByTitle(data.getTitle());
+        Blog blogSameTitle = blogDAO.findBlogByTitle(data.getTitle());
 
         if(blogSameTitle != null)
         {
             throw new BlogExistsException();
         }
 
-        Account account = accountRepo.findAccount(accountId);
+        Account account = accountDAO.findAccount(accountId);
         if(account == null)
         {
             throw new AccountDoesNotExistException();
         }
 
-        Blog createdBlog = blogRepo.createBlog(data);
+        Blog createdBlog = blogDAO.createBlog(data);
 
         createdBlog.setOwner(account);
 
@@ -63,21 +63,21 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public BlogList findBlogsByAccount(Long accountId) {
-        Account account = accountRepo.findAccount(accountId);
+        Account account = accountDAO.findAccount(accountId);
         if(account == null)
         {
             throw new AccountDoesNotExistException();
         }
-        return new BlogList(blogRepo.findBlogsByAccount(accountId));
+        return new BlogList(blogDAO.findBlogsByAccount(accountId));
     }
 
     @Override
     public AccountList findAllAccounts() {
-        return new AccountList(accountRepo.findAllAccounts());
+        return new AccountList(accountDAO.findAllAccounts());
     }
 
     @Override
     public Account findByAccountName(String name) {
-        return accountRepo.findAccountByName(name);
+        return accountDAO.findAccountByName(name);
     }
 }

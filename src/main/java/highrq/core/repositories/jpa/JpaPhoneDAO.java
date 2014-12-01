@@ -1,14 +1,14 @@
 package highrq.core.repositories.jpa;
 
 import highrq.core.models.entities.Phone;
-import highrq.core.repositories.PhoneRepo;
+import highrq.core.repositories.PhoneDAO;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-public class JpaPhoneRepo implements PhoneRepo {
+public class JpaPhoneDAO implements PhoneDAO {
 
     @PersistenceContext
     private EntityManager em;

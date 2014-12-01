@@ -1,6 +1,6 @@
 package highrq.core.repositories.jpa;
 
-import highrq.core.repositories.BlogEntryRepo;
+import highrq.core.repositories.BlogEntryDAO;
 import org.springframework.stereotype.Repository;
 import highrq.core.models.entities.BlogEntry;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Repository
-public class JpaBlogEntryRepo implements BlogEntryRepo {
+public class JpaBlogEntryDAO implements BlogEntryDAO {
     @PersistenceContext
     private EntityManager em;
 

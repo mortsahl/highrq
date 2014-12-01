@@ -1,6 +1,6 @@
 package highrq.core.repositories.jpa;
 
-import highrq.core.repositories.AccountRepo;
+import highrq.core.repositories.AccountDAO;
 import org.springframework.stereotype.Repository;
 import highrq.core.models.entities.Account;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Repository
-public class JpaAccountRepo implements AccountRepo {
+public class JpaAccountDAO implements AccountDAO {
 
     @PersistenceContext
     private EntityManager em;

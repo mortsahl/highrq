@@ -15,10 +15,10 @@ import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring/business-config.xml")
-public class AccountRepoTest {
+public class AccountDAOTest {
 
     @Autowired
-    private AccountRepo repo;
+    private AccountDAO dao;
 
     private Account account;
 
@@ -30,14 +30,14 @@ public class AccountRepoTest {
         account = new Account();
         account.setName("name");
         account.setPassword("password");
-        repo.createAccount(account);
+        dao.createAccount(account);
     }
 
     @Test
     @Transactional
     public void testFind()
     {
-        Account account = repo.findAccount(this.account.getId());
+        Account account = dao.findAccount(this.account.getId());
         assertNotNull(account);
         assertEquals(account.getName(), "name");
         assertEquals(account.getPassword(), "password");

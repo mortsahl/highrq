@@ -1,7 +1,7 @@
 package highrq.core.services.impl;
 
 import highrq.core.models.entities.Phone;
-import highrq.core.repositories.PhoneRepo;
+import highrq.core.repositories.PhoneDAO;
 import highrq.core.services.PhoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,26 +13,26 @@ public class PhoneServiceImpl implements PhoneService {
 
     // TODO - sja: Implement me
     @Autowired
-    private PhoneRepo phoneRepo;
+    private PhoneDAO phoneDAO;
 
     @Override
     public Phone findPhone(Long id) {
-        return phoneRepo.findPhone(id);
+        return phoneDAO.findPhone(id);
     }
 
     @Override
     public Phone createPhone(Phone data) {
-        return phoneRepo.createPhone(data);
+        return phoneDAO.createPhone(data);
     }
 
     @Override
     public Phone deletePhone(Long id) {
-        return phoneRepo.deletePhone(id);
+        return phoneDAO.deletePhone(id);
     }
 
     @Override
     public Phone updatePhone(Long id, Phone data) {
-        return phoneRepo.updatePhone(id, data);
+        return phoneDAO.updatePhone(id, data);
     }
 
 }

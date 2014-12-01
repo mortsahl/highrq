@@ -2,7 +2,7 @@ package highrq.core.repositories;
 
 import highrq.core.models.entities.Phone;
 
-public interface PhoneRepo {
+public interface PhoneDAO {
   public Phone findPhone(Long id);
   public Phone createPhone(Phone data);
   public Phone deletePhone(Long id);
