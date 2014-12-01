@@ -1,8 +1,8 @@
 package highrq.core.repositories.jpa;
 
+import highrq.core.models.entities.Account;
 import highrq.core.repositories.AccountDAO;
 import org.springframework.stereotype.Repository;
-import highrq.core.models.entities.Account;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

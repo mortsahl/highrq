@@ -4,7 +4,6 @@ import highrq.core.models.entities.Blog;
 
 import java.util.List;
 
-
 public interface BlogDAO {
     public Blog createBlog(Blog data);
     public List<Blog> findAllBlogs();

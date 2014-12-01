@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.Collections;
+import java.util.List;
 
 @Repository
 public class JpaPhoneDAO implements PhoneDAO {
@@ -39,6 +42,19 @@ public class JpaPhoneDAO implements PhoneDAO {
         phone.setBody(data.getBody());
         phone.setExt(data.getExt());
         return phone;
+    }
+
+    @Override
+    public List<Phone> findPhonesByAreaCode(String areaCode) {
+        Query query = em.createQuery("Select p from Phone p where p.areaCode=:areaCode");
+        query.setParameter("areaCode", areaCode);
+        List<Phone> phones = query.getResultList();
+        if(phones.size() == 0) {
+            return Collections.EMPTY_LIST;
+        }
+        else {
+            return phones;
+        }
     }
 }
 
