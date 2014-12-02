@@ -1,11 +1,9 @@
 package highrq.core.repositories;
 
 import highrq.core.models.entities.Phone;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -34,18 +32,22 @@ public class PhoneDAOTest {
     private static final String EXT2 = "12345";
 
 
-    @Before
-    @Transactional
-    @Rollback(false)
-    public void setup()
-    {
-        phone = new Phone(AREACODE, PREFIX, BODY, EXT);
-        dao.createPhone(phone);
-    }
+//    @Before
+//    @Transactional
+//    @Rollback(false)
+//    public void setup()
+//    {
+//        phone = new Phone(AREACODE, PREFIX, BODY, EXT);
+//        dao.createPhone(phone);
+//    }
 
     @Test
     @Transactional
     public void testFind() {
+
+        phone = new Phone(AREACODE, PREFIX, BODY, EXT);
+        dao.createPhone(phone);
+
         Phone phone = dao.findPhone(this.phone.getId());
         assertNotNull(phone);
         assertEquals(phone.getAreaCode(), AREACODE);
@@ -59,18 +61,16 @@ public class PhoneDAOTest {
     public void testFindPhonesByAreaCode() {
 
         Phone phone1 =  dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
-        Phone phone2 =  dao.createPhone(new Phone(AREACODE, PREFIX+1, BODY, EXT));
+        Phone phone2 =  dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
         Phone phone3 =  dao.createPhone(new Phone(AREACODE2, PREFIX2, BODY2, EXT2));
 
-        System.out.println(phone1.getId());
-        System.out.println(phone2.getId());
-        System.out.println(phone3.getId());
-
         List<Phone> phones = dao.findPhonesByAreaCode(AREACODE);
-        assertNotNull(phone);
+        assertNotNull(phone1);
+        assertNotNull(phone2);
+        assertNotNull(phone3);
+
         assertEquals(phones.size(), 2);
         Phone ph = phones.get(0);
         assertEquals(ph.getAreaCode(), AREACODE);
-
     }
 }
