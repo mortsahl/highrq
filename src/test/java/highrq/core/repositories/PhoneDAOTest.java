@@ -12,14 +12,13 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring/spring-config.xml")
 public class PhoneDAOTest {
     @Autowired
     private PhoneDAO dao;
-
-    private Phone phone;
 
     private static final String AREACODE = "303";
     private static final String PREFIX = "888";
@@ -31,38 +30,28 @@ public class PhoneDAOTest {
     private static final String BODY2 = "9876";
     private static final String EXT2 = "12345";
 
-
-//    @Before
-//    @Transactional
-//    @Rollback(false)
-//    public void setup()
-//    {
-//        phone = new Phone(AREACODE, PREFIX, BODY, EXT);
-//        dao.createPhone(phone);
-//    }
-
     @Test
     @Transactional
-    public void testFind() {
+    public void testFindPhone() {
 
-        phone = new Phone(AREACODE, PREFIX, BODY, EXT);
+        Phone phone = new Phone(AREACODE, PREFIX, BODY, EXT);
         dao.createPhone(phone);
 
-        Phone phone = dao.findPhone(this.phone.getId());
-        assertNotNull(phone);
-        assertEquals(phone.getAreaCode(), AREACODE);
-        assertEquals(phone.getPrefix(), PREFIX);
-        assertEquals(phone.getBody(), BODY);
-        assertEquals(phone.getExt(),EXT);
+        Phone phone2 = dao.findPhone(phone.getId());
+        assertNotNull(phone2);
+        assertEquals(phone2.getAreaCode(), AREACODE);
+        assertEquals(phone2.getPrefix(), PREFIX);
+        assertEquals(phone2.getBody(), BODY);
+        assertEquals(phone2.getExt(), EXT);
     }
 
     @Test
     @Transactional
     public void testFindPhonesByAreaCode() {
 
-        Phone phone1 =  dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
-        Phone phone2 =  dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
-        Phone phone3 =  dao.createPhone(new Phone(AREACODE2, PREFIX2, BODY2, EXT2));
+        Phone phone1 = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
+        Phone phone2 = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
+        Phone phone3 = dao.createPhone(new Phone(AREACODE2, PREFIX2, BODY2, EXT2));
 
         List<Phone> phones = dao.findPhonesByAreaCode(AREACODE);
         assertNotNull(phone1);
@@ -72,5 +61,43 @@ public class PhoneDAOTest {
         assertEquals(phones.size(), 2);
         Phone ph = phones.get(0);
         assertEquals(ph.getAreaCode(), AREACODE);
+    }
+
+    @Test
+    @Transactional
+    public void testDeletePhone() {
+
+        // Create a phone to delete
+        Phone phone = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
+
+        // get the phone to make sure it was created
+        Phone returnedPhone = dao.findPhone(phone.getId());
+        assertNotNull((returnedPhone));
+
+        // now delete it
+        dao.deletePhone(returnedPhone.getId());
+
+        // now make sure it is gone
+        assertNull(dao.findPhone(phone.getId()));
+    }
+
+    @Test
+    @Transactional
+    public void testPhoneUpdate() {
+
+        String AC = "999";
+
+        // Create a phone to update
+        Phone phone = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
+        assertEquals(phone.getAreaCode(), AREACODE);
+
+        phone.setAreaCode(AC);;
+
+        //update it
+        phone = dao.updatePhone(phone);
+
+        // now check that is was updated
+        assertEquals(phone.getAreaCode(), AC);
+
     }
 }

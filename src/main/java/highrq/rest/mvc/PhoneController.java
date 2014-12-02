@@ -72,7 +72,7 @@ public class PhoneController {
   @RequestMapping(value = "/{phoneId}", method = RequestMethod.PUT)
   public ResponseEntity<PhoneResource> updatePhone(@PathVariable Long phoneId, @RequestBody PhoneResource sentPhone) {
 
-    Phone updatedEntry = service.updatePhone(phoneId, sentPhone.toPhone());
+    Phone updatedEntry = service.updatePhone(sentPhone.toPhone());
 
     if (updatedEntry != null) {
       PhoneResource resource = new PhoneResourceAsm().toResource(updatedEntry);

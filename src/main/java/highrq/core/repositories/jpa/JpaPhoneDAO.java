@@ -35,8 +35,8 @@ public class JpaPhoneDAO implements PhoneDAO {
     }
 
     @Override
-    public Phone updatePhone(Long id, Phone data) {
-        Phone phone = em.find(Phone.class, id);
+    public Phone updatePhone(Phone data) {
+        Phone phone = em.find(Phone.class, data.getId());
         phone.setAreaCode(data.getAreaCode());
         phone.setPrefix(data.getPrefix());
         phone.setBody(data.getBody());

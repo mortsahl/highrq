@@ -1,6 +1,5 @@
 package highrq.core.models.entities.enums;
 
-
 public enum Faith {
 
     CATHOLIC("Catholic"),
@@ -16,7 +15,6 @@ public enum Faith {
     OTHER("Other");
 
     private String value;
-
     private Faith(String value) {
         this.value = value;
     }

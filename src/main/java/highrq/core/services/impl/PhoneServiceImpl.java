@@ -31,8 +31,8 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
-    public Phone updatePhone(Long id, Phone data) {
-        return phoneDAO.updatePhone(id, data);
+    public Phone updatePhone(Phone data) {
+        return phoneDAO.updatePhone(data);
     }
 
 }
