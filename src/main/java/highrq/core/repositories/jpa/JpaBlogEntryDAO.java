@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-
 @Repository
 public class JpaBlogEntryDAO implements BlogEntryDAO {
     @PersistenceContext
@@ -43,7 +42,7 @@ public class JpaBlogEntryDAO implements BlogEntryDAO {
 
     @Override
     public List<BlogEntry> findByBlogId(Long blogId) {
-        Query query = em.createQuery("SELECT b FROM BlogEntry b WHERE b.blog.id=?1");
+        Query query = em.createNamedQuery("BlogEntry.findByBlogId");
         query.setParameter(1, blogId);
         return query.getResultList();
     }

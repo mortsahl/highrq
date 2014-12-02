@@ -46,7 +46,7 @@ public class JpaPhoneDAO implements PhoneDAO {
 
     @Override
     public List<Phone> findPhonesByAreaCode(String areaCode) {
-        Query query = em.createQuery("Select p from Phone p where p.areaCode=:areaCode");
+        Query query = em.createNamedQuery("Phone.findPhonesByAreaCode");
         query.setParameter("areaCode", areaCode);
         List<Phone> phones = query.getResultList();
         if(phones.size() == 0) {

@@ -1,10 +1,13 @@
 package highrq.core.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "phone")
+@NamedQueries ( {
+        @NamedQuery(name = "Phone.findPhonesByAreaCode", query = "Select p from Phone p where p.areaCode=:areaCode")}
+)
+
 public class Phone {
 
   @Id

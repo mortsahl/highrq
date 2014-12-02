@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-
 @Repository
 public class JpaAccountDAO implements AccountDAO {
 
@@ -18,7 +17,7 @@ public class JpaAccountDAO implements AccountDAO {
 
     @Override
     public List<Account> findAllAccounts() {
-        Query query = em.createQuery("SELECT a FROM Account a");
+        Query query = em.createNamedQuery("Account.findAllAccounts");
         return query.getResultList();
     }
 
@@ -29,7 +28,7 @@ public class JpaAccountDAO implements AccountDAO {
 
     @Override
     public Account findAccountByName(String name) {
-        Query query = em.createQuery("SELECT a FROM Account a WHERE a.name=?1");
+        Query query = em.createNamedQuery("Account.findAccountByName");
         query.setParameter(1, name);
         List<Account> accounts = query.getResultList();
         if(accounts.size() == 0) {

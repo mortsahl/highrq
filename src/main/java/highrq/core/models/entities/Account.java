@@ -1,12 +1,17 @@
 package highrq.core.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 
 @Entity
+@Table(name = "account")
+@NamedQueries({
+        @NamedQuery(name = "Account.findAllAccounts", query = "SELECT a FROM Account a"),
+        @NamedQuery(name = "Account.findAccountByName", query = "SELECT a FROM Account a WHERE a.name=?1")
+})
 public class Account {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private String password;

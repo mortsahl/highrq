@@ -1,11 +1,12 @@
 package highrq.core.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "blogentry")
+@NamedQueries({
+        @NamedQuery(name = "BlogEntry.findByBlogId", query = "SELECT b FROM BlogEntry b WHERE b.blog.id=?1")
+})
 public class BlogEntry {
 
     @Id

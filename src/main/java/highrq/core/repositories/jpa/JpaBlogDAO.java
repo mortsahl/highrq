@@ -23,7 +23,7 @@ public class JpaBlogDAO implements BlogDAO {
 
     @Override
     public List<Blog> findAllBlogs() {
-        Query query = em.createQuery("SELECT b from Blog b");
+        Query query = em.createNamedQuery("Blog.findAllBlogs");
         return query.getResultList();
     }
 
@@ -34,7 +34,7 @@ public class JpaBlogDAO implements BlogDAO {
 
     @Override
     public Blog findBlogByTitle(String title) {
-        Query query = em.createQuery("SELECT b from Blog b where b.title=?1");
+        Query query = em.createNamedQuery("Blog.findBlogByTitle");
         query.setParameter(1, title);
         List<Blog> blogs = query.getResultList();
         if(blogs.isEmpty()) {
@@ -46,7 +46,7 @@ public class JpaBlogDAO implements BlogDAO {
 
     @Override
     public List<Blog> findBlogsByAccount(Long accountId) {
-        Query query = em.createQuery("SELECT b from Blog b where b.owner.id=?1");
+        Query query = em.createNamedQuery("Blog.findBlogsByAccount");
         query.setParameter(1, accountId);
         return query.getResultList();
     }
