@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -31,10 +32,23 @@ public class JpaAccountDAO implements AccountDAO {
         Query query = em.createNamedQuery("Account.findAccountByName");
         query.setParameter(1, name);
         List<Account> accounts = query.getResultList();
-        if(accounts.size() == 0) {
+        if (accounts.size() == 0) {
             return null;
         } else {
             return accounts.get(0);
+        }
+    }
+
+    @Override
+    public List<Account> findAccountsByRole(String role) {
+        Query query = em.createNamedQuery("Account.findAccountsByRole");
+        query.setParameter(1, role);
+        List<Account> accounts = query.getResultList();
+        if (accounts.size() == 0) {
+            return Collections.EMPTY_LIST;
+        }
+        else {
+            return accounts;
         }
     }
 

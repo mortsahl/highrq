@@ -27,7 +27,6 @@ import highrq.rest.resources.asm.BlogEntryListResourceAsm;
 
 import java.net.URI;
 
-
 @Controller
 @RequestMapping("/rest/blogs")
 public class BlogController {

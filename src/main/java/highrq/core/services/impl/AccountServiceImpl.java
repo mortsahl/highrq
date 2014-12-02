@@ -32,8 +32,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account createAccount(Account data) {
         Account account = accountDAO.findAccountByName(data.getName());
-        if(account != null)
-        {
+        if (account != null) {
             throw new AccountExistsException();
         }
         return accountDAO.createAccount(data);
@@ -43,29 +42,24 @@ public class AccountServiceImpl implements AccountService {
     public Blog createBlog(Long accountId, Blog data) {
         Blog blogSameTitle = blogDAO.findBlogByTitle(data.getTitle());
 
-        if(blogSameTitle != null)
-        {
+        if (blogSameTitle != null) {
             throw new BlogExistsException();
         }
 
         Account account = accountDAO.findAccount(accountId);
-        if(account == null)
-        {
+        if (account == null) {
             throw new AccountDoesNotExistException();
         }
 
         Blog createdBlog = blogDAO.createBlog(data);
-
         createdBlog.setOwner(account);
-
         return createdBlog;
     }
 
     @Override
     public BlogList findBlogsByAccount(Long accountId) {
         Account account = accountDAO.findAccount(accountId);
-        if(account == null)
-        {
+        if (account == null) {
             throw new AccountDoesNotExistException();
         }
         return new BlogList(blogDAO.findBlogsByAccount(accountId));
@@ -80,4 +74,11 @@ public class AccountServiceImpl implements AccountService {
     public Account findByAccountName(String name) {
         return accountDAO.findAccountByName(name);
     }
+
+    @Override
+    public AccountList findAccountsByRole(String role) {
+        return new AccountList(accountDAO.findAccountsByRole(role));
+    }
+
 }
+

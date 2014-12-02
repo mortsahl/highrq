@@ -8,8 +8,8 @@ import highrq.core.models.entities.Account;
 
 public class AccountResource extends ResourceSupport {
     private String name;
-
     private String password;
+    private String role;
 
     public String getName() {
         return name;
@@ -29,10 +29,19 @@ public class AccountResource extends ResourceSupport {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Account toAccount() {
         Account account = new Account();
         account.setName(name);
         account.setPassword(password);
+        account.setRole(role);
         return account;
     }
 }

@@ -5,7 +5,6 @@ import org.springframework.hateoas.ResourceSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class AccountListResource extends ResourceSupport {
     private List<AccountResource> accounts = new ArrayList<AccountResource>();
 

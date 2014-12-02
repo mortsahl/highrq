@@ -15,11 +15,12 @@ public class AccountResourceAsm extends ResourceAssemblerSupport<Account, Accoun
 
     @Override
     public AccountResource toResource(Account account) {
-        AccountResource res = new AccountResource();
-        res.setName(account.getName());
-        res.setPassword(account.getPassword());
-        res.add(linkTo(methodOn(AccountController.class).getAccount(account.getId())).withSelfRel());
-        res.add(linkTo(methodOn(AccountController.class).findAllBlogs(account.getId())).withRel("blogs"));
-        return res;
+        AccountResource resource = new AccountResource();
+        resource.setName(account.getName());
+        resource.setPassword(account.getPassword());
+        resource.setRole((account.getRole()));
+        resource.add(linkTo(methodOn(AccountController.class).getAccount(account.getId())).withSelfRel());
+        resource.add(linkTo(methodOn(AccountController.class).findAllBlogs(account.getId())).withRel("blogs"));
+        return resource;
     }
 }

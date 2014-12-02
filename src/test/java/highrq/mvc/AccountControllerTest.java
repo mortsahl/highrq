@@ -1,14 +1,5 @@
 package highrq.mvc;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import highrq.core.models.entities.Account;
 import highrq.core.models.entities.Blog;
 import highrq.core.services.AccountService;
@@ -18,12 +9,20 @@ import highrq.core.services.exceptions.BlogExistsException;
 import highrq.core.services.util.AccountList;
 import highrq.core.services.util.BlogList;
 import highrq.rest.mvc.AccountController;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -32,10 +31,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class AccountControllerTest {
     @InjectMocks
@@ -45,15 +41,12 @@ public class AccountControllerTest {
     private AccountService service;
 
     private MockMvc mockMvc;
-
     private ArgumentCaptor<Account> accountCaptor;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-
         accountCaptor = ArgumentCaptor.forClass(Account.class);
     }
 
@@ -102,7 +95,6 @@ public class AccountControllerTest {
         mockMvc.perform(get("/rest/accounts/1/blogs"))
                 .andExpect(status().isNotFound());
     }
-
 
     @Test
     public void createBlogExistingAccount() throws Exception {
@@ -233,7 +225,7 @@ public class AccountControllerTest {
 
 
     @Test
-    public void findAccountsByName() throws Exception {
+    public void findAccountByName() throws Exception {
         List<Account> accounts = new ArrayList<Account>();
 
         Account accountA = new Account();
@@ -257,4 +249,37 @@ public class AccountControllerTest {
                         everyItem(endsWith("accountA"))))
                 .andExpect(status().isOk());
     }
+
+    // TODO - sja: need testFindAccountsByRole
+
+//    @Test
+//    public void findAccountsByRole() throws Exception {
+//        List<Account> accounts = new ArrayList<Account>();
+//
+//        Account accountA = new Account();
+//        accountA.setId(1L);
+//        accountA.setPassword("accountA");
+//        accountA.setName("accountA");
+//        accountA.setRole(Role.GUEST.toString());
+//        accounts.add(accountA);
+//
+//        Account accountB = new Account();
+//        accountB.setId(1L);
+//        accountB.setPassword("accountB");
+//        accountB.setName("accountB");
+//        accountB.setRole(Role.USER.toString());
+//        accounts.add(accountB);
+//
+//        AccountList accountList = new AccountList(accounts);
+//
+//        when(service.findAccountsByRole(Role.GUEST.toString())).thenReturn(accountList);
+//
+//        mockMvc.perform(get("/rest/accounts/role"))
+//                .andDo(print())
+//                .andExpect(jsonPath("$.password", is(nullValue())))
+//                .andExpect(jsonPath("$.name", is(accountList.get(0).getName())))
+//                .andExpect(jsonPath("$.links[*].rel",
+//                        hasItems(endsWith("self"), endsWith("blogs"))))
+//                .andExpect(status().isOk());
+//    }
 }
