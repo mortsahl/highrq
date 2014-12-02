@@ -1,4 +1,4 @@
-package highrq.core.services.impl;
+package highrq.core.services;
 
 import highrq.core.models.entities.Phone;
 import highrq.core.repositories.PhoneDAO;
@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class PhoneServiceImpl implements PhoneService {
 
-    // TODO - sja: Implement me
     @Autowired
     private PhoneDAO phoneDAO;
 

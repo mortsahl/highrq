@@ -1,4 +1,4 @@
-package highrq.core.services.impl;
+package highrq.core.services;
 
 import highrq.core.repositories.BlogEntryDAO;
 import org.springframework.beans.factory.annotation.Autowired;

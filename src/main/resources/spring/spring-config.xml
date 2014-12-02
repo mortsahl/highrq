@@ -40,5 +40,5 @@
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>
 
-    <context:component-scan base-package="highrq.core.services.impl"/>
+    <context:component-scan base-package="highrq.core.services"/>
 </beans>
