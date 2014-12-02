@@ -1,4 +1,4 @@
-package highrq.core.services;
+package highrq.core.services.impl;
 
 import highrq.core.models.entities.Phone;
 import highrq.core.repositories.PhoneDAO;

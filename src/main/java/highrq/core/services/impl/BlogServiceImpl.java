@@ -1,4 +1,4 @@
-package highrq.core.services;
+package highrq.core.services.impl;
 
 import highrq.core.repositories.BlogEntryDAO;
 import highrq.core.services.BlogService;

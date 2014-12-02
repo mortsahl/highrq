@@ -1,4 +1,4 @@
-package highrq.core.services;
+package highrq.core.services.impl;
 
 import highrq.core.models.entities.Account;
 import highrq.core.models.entities.Blog;
