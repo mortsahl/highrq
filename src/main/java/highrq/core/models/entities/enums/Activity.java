@@ -11,4 +11,8 @@ public enum Activity {
     private Activity(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
 }

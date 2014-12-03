@@ -16,4 +16,8 @@ public enum Appeal {
     private Appeal(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
 }

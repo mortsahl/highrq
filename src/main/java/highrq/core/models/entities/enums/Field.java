@@ -23,4 +23,8 @@ public enum Field {
     private Field(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
 }

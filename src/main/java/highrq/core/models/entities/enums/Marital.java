@@ -12,4 +12,8 @@ public enum Marital {
     private Marital(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
 }

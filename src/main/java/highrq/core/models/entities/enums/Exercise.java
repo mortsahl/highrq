@@ -11,4 +11,8 @@ public enum Exercise {
     private Exercise(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
 }

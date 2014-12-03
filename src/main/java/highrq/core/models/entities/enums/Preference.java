@@ -10,6 +10,10 @@ public enum Preference {
     private Preference(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
 };
 
 

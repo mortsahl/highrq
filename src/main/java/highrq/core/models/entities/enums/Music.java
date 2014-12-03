@@ -21,4 +21,8 @@ public enum Music {
     private Music(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
 }

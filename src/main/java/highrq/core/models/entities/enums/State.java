@@ -65,4 +65,8 @@ public enum State {
     public String toString() {
         return name;
     }
+
+    public String getValue() {
+        return name;
+    }
 }

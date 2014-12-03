@@ -16,4 +16,8 @@ public enum Affiliation {
     private Affiliation(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
 }

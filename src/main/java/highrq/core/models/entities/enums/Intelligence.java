@@ -16,4 +16,8 @@ public enum Intelligence {
     private Intelligence(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
 }
