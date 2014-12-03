@@ -1,4 +1,4 @@
-package date.mvc;
+package highrq.mvc;
 
 import highrq.core.models.entities.Phone;
 import highrq.core.services.PhoneService;
@@ -14,7 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
@@ -99,8 +99,7 @@ public class PhoneControllerTest {
       .andExpect(jsonPath("$.prefix", is(foundPhone.getPrefix())))
       .andExpect(jsonPath("$.body", is(foundPhone.getBody())))
       .andExpect(jsonPath("$.ext", is(foundPhone.getExt())))
-        // TODO - sja: I don't know why the below line fails
-//      .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/phones/1"))))
+      .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/phones/1"))))
       .andExpect(status().isOk());
   }
 
@@ -126,8 +125,7 @@ public class PhoneControllerTest {
     mockMvc.perform(delete("/rest/phones/1"))
       .andExpect(jsonPath("$.areaCode", is(deletedPhone.getAreaCode())))
       .andExpect(jsonPath("$.ext", is(deletedPhone.getExt())))
-        // TODO - sja: I don't know why the below line fails
-//      .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/phones/1"))))
+      .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/phones/1"))))
       .andExpect(status().isOk());
   }
 }

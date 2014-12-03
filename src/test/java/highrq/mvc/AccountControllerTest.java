@@ -2,6 +2,7 @@ package highrq.mvc;
 
 import highrq.core.models.entities.Account;
 import highrq.core.models.entities.Blog;
+import highrq.core.models.entities.enums.Role;
 import highrq.core.services.AccountService;
 import highrq.core.services.exceptions.AccountDoesNotExistException;
 import highrq.core.services.exceptions.AccountExistsException;
@@ -218,11 +219,9 @@ public class AccountControllerTest {
         when(service.findAllAccounts()).thenReturn(accountList);
 
         mockMvc.perform(get("/rest/accounts"))
-                .andExpect(jsonPath("$.accounts[*].name",
-                        hasItems(endsWith("accountA"), endsWith("accountB"))))
+                .andExpect(jsonPath("$.accounts[*].name", hasItems(endsWith("accountA"), endsWith("accountB"))))
                 .andExpect(status().isOk());
     }
-
 
     @Test
     public void findAccountByName() throws Exception {
@@ -250,36 +249,29 @@ public class AccountControllerTest {
                 .andExpect(status().isOk());
     }
 
-    // TODO - sja: need testFindAccountsByRole
+    @Test
+    public void findAccountsByRole() throws Exception {
+        List<Account> accounts = new ArrayList<Account>();
 
-//    @Test
-//    public void findAccountsByRole() throws Exception {
-//        List<Account> accounts = new ArrayList<Account>();
-//
-//        Account accountA = new Account();
-//        accountA.setId(1L);
-//        accountA.setPassword("accountA");
-//        accountA.setName("accountA");
-//        accountA.setRole(Role.GUEST.toString());
-//        accounts.add(accountA);
-//
-//        Account accountB = new Account();
-//        accountB.setId(1L);
-//        accountB.setPassword("accountB");
-//        accountB.setName("accountB");
-//        accountB.setRole(Role.USER.toString());
-//        accounts.add(accountB);
-//
-//        AccountList accountList = new AccountList(accounts);
-//
-//        when(service.findAccountsByRole(Role.GUEST.toString())).thenReturn(accountList);
-//
-//        mockMvc.perform(get("/rest/accounts/role"))
-//                .andDo(print())
-//                .andExpect(jsonPath("$.password", is(nullValue())))
-//                .andExpect(jsonPath("$.name", is(accountList.get(0).getName())))
-//                .andExpect(jsonPath("$.links[*].rel",
-//                        hasItems(endsWith("self"), endsWith("blogs"))))
-//                .andExpect(status().isOk());
-//    }
+        Account accountA = new Account();
+        accountA.setId(1L);
+        accountA.setPassword("accountA");
+        accountA.setName("accountA");
+        accountA.setRole(Role.GUEST.getValue());
+        accounts.add(accountA);
+
+        Account accountB = new Account();
+        accountB.setId(1L);
+        accountB.setPassword("accountB");
+        accountB.setName("accountB");
+        accountB.setRole(Role.GUEST.getValue());
+        accounts.add(accountB);
+
+        AccountList accountList = new AccountList(accounts);
+        when(service.findAccountsByRole(Role.GUEST.getValue())).thenReturn(accountList);
+
+        mockMvc.perform(get("/rest/accounts/role/Guest"))
+                .andExpect(jsonPath("$.accounts[*].name", hasItems(endsWith("accountA"), endsWith("accountB"))))
+                .andExpect(status().isOk());
+    }
 }

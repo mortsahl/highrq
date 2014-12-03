@@ -7,7 +7,13 @@ public enum Role {
     ADMIN("Admin");
 
     private String value;
+
     private Role(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
 }
+
