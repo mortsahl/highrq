@@ -4,6 +4,7 @@ public enum Hair {
     BROWN("Brown"),
     BLONDE("Blonde"),
     RED("Red"),
+    AUBURN("Auburn"),
     BLUE("Blue"),
     GREEN("Green"),
     PURPLE("Purple"),
