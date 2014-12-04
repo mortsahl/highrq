@@ -7,7 +7,7 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "Blog.findAllBlogs", query = "SELECT b from Blog b"),
         @NamedQuery(name = "Blog.findBlogByTitle", query = "SELECT b from Blog b where b.title=?1"),
-        @NamedQuery(name = "Blog.findBlogsByAccount", query = "SELECT b from Blog b where b.owner.id=?1")
+        @NamedQuery(name = "Blog.findBlogsByAccount", query = "SELECT b from Blog b where b.account.id=?1")
 })
 public class Blog {
     @Id
@@ -17,7 +17,7 @@ public class Blog {
     private String title;
 
     @OneToOne
-    private Account owner;
+    private Account account;
 
     public Long getId() {
         return id;
@@ -35,11 +35,11 @@ public class Blog {
         this.title = title;
     }
 
-    public Account getOwner() {
-        return owner;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setOwner(Account owner) {
-        this.owner = owner;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

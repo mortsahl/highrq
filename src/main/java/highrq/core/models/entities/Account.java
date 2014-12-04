@@ -19,6 +19,8 @@ public class Account {
     private String password;
     private String role;
 
+    // TODO - sja: Need firstname/lastname"
+
     public Account() {}
     public Account(String name, String password, String role) {
         this.name = name;

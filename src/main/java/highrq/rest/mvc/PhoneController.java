@@ -22,66 +22,68 @@ import java.net.URI;
 @RequestMapping("/rest/phones")
 public class PhoneController {
 
-  private PhoneService service;
+    private PhoneService service;
 
-  @Autowired
-  public PhoneController(PhoneService phoneService) {
-    this.service = phoneService;
-  }
-
-  @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<PhoneResource> createPhone(@RequestBody PhoneResource sentPhone) {
-
-    try {
-      Phone createdPhone = service.createPhone(sentPhone.toPhone());
-      PhoneResource res = new PhoneResourceAsm().toResource(createdPhone);
-      HttpHeaders headers = new HttpHeaders();
-      headers.setLocation(URI.create(res.getLink("self").getHref()));
-      return new ResponseEntity<PhoneResource>(res, headers, HttpStatus.CREATED);
+    @Autowired
+    public PhoneController(PhoneService phoneService) {
+        this.service = phoneService;
     }
-    catch (PhoneExistsException exception) {
-      throw new ConflictException(exception);
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<PhoneResource> createPhone(@RequestBody PhoneResource sentPhone) {
+
+        try {
+            Phone createdPhone = service.createPhone(sentPhone.toPhone());
+            PhoneResource res = new PhoneResourceAsm().toResource(createdPhone);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create(res.getLink("self").getHref()));
+            return new ResponseEntity<PhoneResource>(res, headers, HttpStatus.CREATED);
+        }
+        catch (PhoneExistsException exception) {
+            throw new ConflictException(exception);
+        }
     }
-  }
 
-  @RequestMapping(value = "/{phoneId}", method = RequestMethod.GET)
-  public ResponseEntity<PhoneResource> getPhone(@PathVariable Long phoneId) {
+    @RequestMapping(value = "/{phoneId}", method = RequestMethod.GET)
+    public ResponseEntity<PhoneResource> getPhone(@PathVariable Long phoneId) {
 
-    Phone phone = service.findPhone(phoneId);
-    if (phone != null) {
-      PhoneResource res = new PhoneResourceAsm().toResource(phone);
-      return new ResponseEntity<PhoneResource>(res, HttpStatus.OK);
-    } else {
-      return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);
+        Phone phone = service.findPhone(phoneId);
+        if (phone != null) {
+            PhoneResource res = new PhoneResourceAsm().toResource(phone);
+            return new ResponseEntity<PhoneResource>(res, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);
+        }
     }
-  }
 
-  @RequestMapping(value = "/{phoneId}", method = RequestMethod.DELETE)
-  public ResponseEntity<PhoneResource> deletePhone(@PathVariable Long phoneId) {
+    @RequestMapping(value = "/{phoneId}", method = RequestMethod.DELETE)
+    public ResponseEntity<PhoneResource> deletePhone(@PathVariable Long phoneId) {
 
-    Phone phone = service.deletePhone(phoneId);
-    if (phone != null) {
-      PhoneResource resource = new PhoneResourceAsm().toResource(phone);
-      return new ResponseEntity<PhoneResource>(resource, HttpStatus.OK);
+        Phone phone = service.deletePhone(phoneId);
+        if (phone != null) {
+            PhoneResource resource = new PhoneResourceAsm().toResource(phone);
+            return new ResponseEntity<PhoneResource>(resource, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);
+        }
     }
-    else {
-      return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);
-    }
-  }
 
-  @RequestMapping(value = "/{phoneId}", method = RequestMethod.PUT)
-  public ResponseEntity<PhoneResource> updatePhone(@PathVariable Long phoneId, @RequestBody PhoneResource sentPhone) {
+    @RequestMapping(value = "/{phoneId}", method = RequestMethod.PUT)
+    public ResponseEntity<PhoneResource> updatePhone(@PathVariable Long phoneId, @RequestBody PhoneResource sentPhone) {
 
-    Phone updatedEntry = service.updatePhone(sentPhone.toPhone());
+        Phone updatedEntry = service.updatePhone(sentPhone.toPhone());
 
-    if (updatedEntry != null) {
-      PhoneResource resource = new PhoneResourceAsm().toResource(updatedEntry);
-      return new ResponseEntity<PhoneResource>(resource, HttpStatus.OK);
+        if (updatedEntry != null) {
+            PhoneResource resource = new PhoneResourceAsm().toResource(updatedEntry);
+            return new ResponseEntity<PhoneResource>(resource, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);
+        }
     }
-    else {
-      return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);
-    }
-  }
+
+    // TODO - sja: Need findPhonesByAccount
+
+    // TODO - sja: Need findPhonesByAreaCode
 
 }
 

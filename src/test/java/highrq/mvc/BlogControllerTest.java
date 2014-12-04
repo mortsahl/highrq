@@ -1,5 +1,13 @@
 package highrq.mvc;
 
+import highrq.core.models.entities.Account;
+import highrq.core.models.entities.Blog;
+import highrq.core.models.entities.BlogEntry;
+import highrq.core.services.BlogService;
+import highrq.core.services.exceptions.BlogNotFoundException;
+import highrq.core.services.util.BlogEntryList;
+import highrq.core.services.util.BlogList;
+import highrq.rest.mvc.BlogController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -8,14 +16,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import highrq.core.models.entities.Account;
-import highrq.core.services.util.BlogEntryList;
-import highrq.core.models.entities.Blog;
-import highrq.core.models.entities.BlogEntry;
-import highrq.core.services.BlogService;
-import highrq.core.services.exceptions.BlogNotFoundException;
-import highrq.core.services.util.BlogList;
-import highrq.rest.mvc.BlogController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +26,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class BlogControllerTest {
     @InjectMocks
@@ -80,7 +76,7 @@ public class BlogControllerTest {
 
         Account account = new Account();
         account.setId(1L);
-        blog.setOwner(account);
+        blog.setAccount(account);
 
         when(blogService.findBlog(1L)).thenReturn(blog);
 
@@ -125,7 +121,6 @@ public class BlogControllerTest {
                 .andExpect(status().isCreated());
     }
 
-
     @Test
     public void createBlogEntryNonExistingBlog() throws Exception {
         when(blogService.createBlogEntry(eq(1L), any(BlogEntry.class))).thenThrow(new BlogNotFoundException());
@@ -156,7 +151,7 @@ public class BlogControllerTest {
         when(blogService.findAllBlogEntries(1L)).thenReturn(list);
 
         mockMvc.perform(get("/rest/blogs/1/blog-entries"))
-                .andDo(print())
+//                .andDo(print())
                 .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/blogs/1/blog-entries"))))
                 .andExpect(jsonPath("$.entries[*].title", hasItem(is("Test Title"))))
                 .andExpect(status().isOk());
@@ -167,7 +162,7 @@ public class BlogControllerTest {
         when(blogService.findAllBlogEntries(1L)).thenThrow(new BlogNotFoundException());
 
         mockMvc.perform(get("/rest/blogs/1/blog-entries"))
-                .andDo(print())
+//                .andDo(print())
                 .andExpect(status().isNotFound());
     }
 }

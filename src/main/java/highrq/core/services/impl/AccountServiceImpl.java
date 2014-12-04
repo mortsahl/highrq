@@ -52,7 +52,7 @@ public class AccountServiceImpl implements AccountService {
         }
 
         Blog createdBlog = blogDAO.createBlog(data);
-        createdBlog.setOwner(account);
+        createdBlog.setAccount(account);
         return createdBlog;
     }
 

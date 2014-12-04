@@ -41,14 +41,17 @@ public class AccountController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<AccountListResource> findAllAccounts(@RequestParam(value = "name", required = false) String name) {
+
         AccountList list = null;
         if (name == null) {
             list = accountService.findAllAccounts();
-        } else {
+        }
+        else {
             Account account = accountService.findByAccountName(name);
             if (account == null) {
                 list = new AccountList(new ArrayList<Account>());
-            } else {
+            }
+            else {
                 list = new AccountList(Arrays.asList(account));
             }
         }
@@ -57,9 +60,7 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<AccountResource> createAccount(
-            @RequestBody AccountResource sentAccount
-    ) {
+    public ResponseEntity<AccountResource> createAccount(@RequestBody AccountResource sentAccount) {
         try {
             Account createdAccount = accountService.createAccount(sentAccount.toAccount());
             AccountResource res = new AccountResourceAsm().toResource(createdAccount);
@@ -78,7 +79,8 @@ public class AccountController {
         if (account != null) {
             AccountResource res = new AccountResourceAsm().toResource(account);
             return new ResponseEntity<AccountResource>(res, HttpStatus.OK);
-        } else {
+        }
+        else {
             return new ResponseEntity<AccountResource>(HttpStatus.NOT_FOUND);
         }
     }

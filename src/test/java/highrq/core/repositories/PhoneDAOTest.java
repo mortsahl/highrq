@@ -1,6 +1,7 @@
 package highrq.core.repositories;
 
 import highrq.core.models.entities.Phone;
+import highrq.core.models.entities.enums.PhoneType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,14 @@ public class PhoneDAOTest {
     private static final String BODY2 = "9876";
     private static final String EXT2 = "12345";
 
+    private static final String TYPE = PhoneType.HOME.getValue();
+    private static final Long ACCOUNT_ID = 1L;
+
     @Test
     @Transactional
     public void testFindPhone() {
 
-        Phone phone = new Phone(AREACODE, PREFIX, BODY, EXT);
+        Phone phone = new Phone(AREACODE, PREFIX, BODY, EXT, TYPE, ACCOUNT_ID);
         dao.createPhone(phone);
 
         Phone phone2 = dao.findPhone(phone.getId());
@@ -43,15 +47,17 @@ public class PhoneDAOTest {
         assertEquals(phone2.getPrefix(), PREFIX);
         assertEquals(phone2.getBody(), BODY);
         assertEquals(phone2.getExt(), EXT);
+        assertEquals(phone2.getType(), TYPE);
+        assertEquals(phone2.getAccountId(), ACCOUNT_ID);
     }
 
     @Test
     @Transactional
     public void testFindPhonesByAreaCode() {
 
-        Phone phone1 = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
-        Phone phone2 = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
-        Phone phone3 = dao.createPhone(new Phone(AREACODE2, PREFIX2, BODY2, EXT2));
+        Phone phone1 = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT, TYPE, ACCOUNT_ID));
+        Phone phone2 = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT, TYPE, ACCOUNT_ID));
+        Phone phone3 = dao.createPhone(new Phone(AREACODE2, PREFIX2, BODY2, EXT2, TYPE, ACCOUNT_ID));
 
         List<Phone> phones = dao.findPhonesByAreaCode(AREACODE);
         assertNotNull(phone1);
@@ -61,6 +67,7 @@ public class PhoneDAOTest {
         assertEquals(phones.size(), 2);
         Phone ph = phones.get(0);
         assertEquals(ph.getAreaCode(), AREACODE);
+        assertEquals(ph.getAccountId(), ACCOUNT_ID);
     }
 
     @Test
@@ -68,9 +75,7 @@ public class PhoneDAOTest {
     public void testDeletePhone() {
 
         // Create a phone to delete
-        Phone phone = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
-
-        // get the phone to make sure it was created
+        Phone phone = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT, TYPE, ACCOUNT_ID));
         Phone returnedPhone = dao.findPhone(phone.getId());
         assertNotNull((returnedPhone));
 
@@ -88,7 +93,7 @@ public class PhoneDAOTest {
         String AC = "999";
 
         // Create a phone to update
-        Phone phone = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT));
+        Phone phone = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT, TYPE, ACCOUNT_ID));
         assertEquals(phone.getAreaCode(), AREACODE);
 
         phone.setAreaCode(AC);;

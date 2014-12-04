@@ -9,6 +9,8 @@ public class PhoneResource extends ResourceSupport {
   private String prefix;
   private String body;
   private String ext;
+  private String type;
+  private Long accountId;
 
   public String getAreaCode() {
     return areaCode;
@@ -42,12 +44,31 @@ public class PhoneResource extends ResourceSupport {
     this.ext = ext;
   }
 
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public Long getAccountId() {
+    return accountId;
+  }
+
+  public void setAccountId(Long accountId) {
+    this.accountId = accountId;
+  }
+
   public Phone toPhone() {
     Phone phone = new Phone();
     phone.setAreaCode(areaCode);
     phone.setPrefix(prefix);
     phone.setBody(body);
     phone.setExt(ext);
+    phone.setType(type);
+    phone.setAccountId(accountId);
+
     return phone;
   }
 }

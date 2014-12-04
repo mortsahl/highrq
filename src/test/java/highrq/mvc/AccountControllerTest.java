@@ -108,7 +108,7 @@ public class AccountControllerTest {
         mockMvc.perform(post("/rest/accounts/1/blogs")
                 .content("{\"title\":\"Test Title\"}")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
+//                .andDo(print())
                 .andExpect(jsonPath("$.title", is("Test Title")))
                 .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/blogs/1"))))
                 .andExpect(header().string("Location", endsWith("/blogs/1")))
@@ -182,7 +182,7 @@ public class AccountControllerTest {
         when(service.findAccount(1L)).thenReturn(foundAccount);
 
         mockMvc.perform(get("/rest/accounts/1"))
-                .andDo(print())
+//                .andDo(print())
                 .andExpect(jsonPath("$.password", is(nullValue())))
                 .andExpect(jsonPath("$.name", is(foundAccount.getName())))
                 .andExpect(jsonPath("$.links[*].rel",

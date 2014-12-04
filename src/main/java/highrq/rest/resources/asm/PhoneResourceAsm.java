@@ -21,6 +21,8 @@ public class PhoneResourceAsm extends ResourceAssemblerSupport<Phone, PhoneResou
     resource.setPrefix(phone.getPrefix());
     resource.setBody(phone.getBody());
     resource.setExt(phone.getExt());
+    resource.setType(phone.getType());
+    resource.setAccountId(phone.getAccountId());
 
     //  Link link =
     linkTo(PhoneController.class).slash(phone.getId()).withSelfRel();

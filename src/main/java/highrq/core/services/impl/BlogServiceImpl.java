@@ -21,7 +21,7 @@ public class BlogServiceImpl implements BlogService {
     private BlogDAO blogDAO;
 
     @Autowired
-    private BlogEntryDAO entryDAO;
+    private BlogEntryDAO blogEntryDAO;
 
     @Override
     public BlogEntry createBlogEntry(Long blogId, BlogEntry data) {
@@ -30,7 +30,7 @@ public class BlogServiceImpl implements BlogService {
         {
             throw new BlogNotFoundException();
         }
-        BlogEntry entry = entryDAO.createBlogEntry(data);
+        BlogEntry entry = blogEntryDAO.createBlogEntry(data);
         entry.setBlog(blog);
         return entry;
     }
@@ -47,7 +47,7 @@ public class BlogServiceImpl implements BlogService {
         {
             throw new BlogNotFoundException();
         }
-        return new BlogEntryList(blogId, entryDAO.findByBlogId(blogId));
+        return new BlogEntryList(blogId, blogEntryDAO.findByBlogId(blogId));
     }
 
     @Override

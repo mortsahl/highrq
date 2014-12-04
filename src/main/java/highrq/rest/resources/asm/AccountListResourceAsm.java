@@ -12,6 +12,7 @@ import java.util.List;
 public class AccountListResourceAsm extends ResourceAssemblerSupport<AccountList, AccountListResource> {
 
 
+
     public AccountListResourceAsm() {
         super(AccountController.class, AccountListResource.class);
     }
