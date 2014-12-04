@@ -31,7 +31,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account createAccount(Account data) {
-        Account account = accountDAO.findAccountByName(data.getName());
+        Account account = accountDAO.findAccountByUsername(data.getUsername());
         if (account != null) {
             throw new AccountExistsException();
         }
@@ -71,8 +71,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account findByAccountName(String name) {
-        return accountDAO.findAccountByName(name);
+    public Account findAccountByUsername(String username) {
+        return accountDAO.findAccountByUsername(username);
     }
 
     @Override

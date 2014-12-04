@@ -3,27 +3,26 @@ package highrq.core.models.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
-
 @Entity
 @Table(name = "account")
 @NamedQueries({
         @NamedQuery(name = "Account.findAllAccounts", query = "SELECT a FROM Account a"),
-        @NamedQuery(name = "Account.findAccountByName", query = "SELECT a FROM Account a WHERE a.name=?1"),
+        @NamedQuery(name = "Account.findAccountByUsername", query = "SELECT a FROM Account a WHERE a.username=?1"),
         @NamedQuery(name = "Account.findAccountsByRole", query = "SELECT a FROM Account a WHERE a.role=?1")
 })
 public class Account {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
+    private String username;
     private String password;
     private String role;
 
     // TODO - sja: Need firstname/lastname"
 
     public Account() {}
-    public Account(String name, String password, String role) {
-        this.name = name;
+    public Account(String username, String password, String role) {
+        this.username = username;
         this.password = password;
         this.role = role;
     }
@@ -36,12 +35,12 @@ public class Account {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -62,7 +61,7 @@ public class Account {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, password, role);
+        return Objects.hash(id, username, password, role);
     }
 
     @Override
@@ -74,6 +73,6 @@ public class Account {
             return false;
         }
         final Account other = (Account) obj;
-        return Objects.equals(this.id, other.id) && Objects.equals(this.name, other.name) && Objects.equals(this.password, other.password) && Objects.equals(this.role, other.role);
+        return Objects.equals(this.id, other.id) && Objects.equals(this.username, other.username) && Objects.equals(this.password, other.password) && Objects.equals(this.role, other.role);
     }
 }

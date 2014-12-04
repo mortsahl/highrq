@@ -32,7 +32,7 @@ public class AccountDAOTest {
 
         Account accnt = dao.findAccount(account.getId());
         assertNotNull(accnt);
-        assertEquals(accnt.getName(), "name");
+        assertEquals(accnt.getUsername(), "name");
         assertEquals(accnt.getPassword(), "password");
         assertEquals(accnt.getRole(), Role.USER.toString());
     }

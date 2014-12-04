@@ -8,6 +8,6 @@ public interface AccountDAO {
     public List<Account> findAllAccounts();
     public List<Account> findAccountsByRole(String role);
     public Account findAccount(Long id);
-    public Account findAccountByName(String name);
+    public Account findAccountByUsername(String username);
     public Account createAccount(Account data);
 }

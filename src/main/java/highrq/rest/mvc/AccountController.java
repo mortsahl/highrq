@@ -41,14 +41,14 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<AccountListResource> findAllAccounts(@RequestParam(value = "name", required = false) String name) {
+    public ResponseEntity<AccountListResource> findAllAccounts(@RequestParam(value = "username", required = false) String username) {
 
         AccountList list = null;
-        if (name == null) {
+        if (username == null) {
             list = accountService.findAllAccounts();
         }
         else {
-            Account account = accountService.findByAccountName(name);
+            Account account = accountService.findAccountByUsername(username);
             if (account == null) {
                 list = new AccountList(new ArrayList<Account>());
             }

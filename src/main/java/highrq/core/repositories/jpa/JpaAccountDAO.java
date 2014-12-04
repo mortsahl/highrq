@@ -28,9 +28,9 @@ public class JpaAccountDAO implements AccountDAO {
     }
 
     @Override
-    public Account findAccountByName(String name) {
-        Query query = em.createNamedQuery("Account.findAccountByName");
-        query.setParameter(1, name);
+    public Account findAccountByUsername(String username) {
+        Query query = em.createNamedQuery("Account.findAccountByUsername");
+        query.setParameter(1, username);
         List<Account> accounts = query.getResultList();
         if (accounts.size() == 0) {
             return null;

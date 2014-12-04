@@ -31,7 +31,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class AccountControllerTest {
@@ -140,7 +139,7 @@ public class AccountControllerTest {
         Account createdAccount = new Account();
         createdAccount.setId(1L);
         createdAccount.setPassword("test");
-        createdAccount.setName("test");
+        createdAccount.setUsername("test");
 
         when(service.createAccount(any(Account.class))).thenReturn(createdAccount);
 
@@ -148,7 +147,7 @@ public class AccountControllerTest {
                 .content("{\"name\":\"test\",\"password\":\"test\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(header().string("Location", endsWith("/rest/accounts/1")))
-                .andExpect(jsonPath("$.name", is(createdAccount.getName())))
+                .andExpect(jsonPath("$.name", is(createdAccount.getUsername())))
                 .andExpect(status().isCreated());
 
         verify(service).createAccount(accountCaptor.capture());
@@ -162,7 +161,7 @@ public class AccountControllerTest {
         Account createdAccount = new Account();
         createdAccount.setId(1L);
         createdAccount.setPassword("test");
-        createdAccount.setName("test");
+        createdAccount.setUsername("test");
 
         when(service.createAccount(any(Account.class))).thenThrow(new AccountExistsException());
 
@@ -177,14 +176,14 @@ public class AccountControllerTest {
         Account foundAccount = new Account();
         foundAccount.setId(1L);
         foundAccount.setPassword("test");
-        foundAccount.setName("test");
+        foundAccount.setUsername("test");
 
         when(service.findAccount(1L)).thenReturn(foundAccount);
 
         mockMvc.perform(get("/rest/accounts/1"))
 //                .andDo(print())
                 .andExpect(jsonPath("$.password", is(nullValue())))
-                .andExpect(jsonPath("$.name", is(foundAccount.getName())))
+                .andExpect(jsonPath("$.name", is(foundAccount.getUsername())))
                 .andExpect(jsonPath("$.links[*].rel",
                         hasItems(endsWith("self"), endsWith("blogs"))))
                         .andExpect(status().isOk());
@@ -205,13 +204,13 @@ public class AccountControllerTest {
         Account accountA = new Account();
         accountA.setId(1L);
         accountA.setPassword("accountA");
-        accountA.setName("accountA");
+        accountA.setUsername("accountA");
         accounts.add(accountA);
 
         Account accountB = new Account();
         accountB.setId(1L);
         accountB.setPassword("accountB");
-        accountB.setName("accountB");
+        accountB.setUsername("accountB");
         accounts.add(accountB);
 
         AccountList accountList = new AccountList(accounts);
@@ -224,19 +223,19 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void findAccountByName() throws Exception {
+    public void findAccountByUsername() throws Exception {
         List<Account> accounts = new ArrayList<Account>();
 
         Account accountA = new Account();
         accountA.setId(1L);
         accountA.setPassword("accountA");
-        accountA.setName("accountA");
+        accountA.setUsername("accountA");
         accounts.add(accountA);
 
         Account accountB = new Account();
         accountB.setId(1L);
         accountB.setPassword("accountB");
-        accountB.setName("accountB");
+        accountB.setUsername("accountB");
         accounts.add(accountB);
 
         AccountList accountList = new AccountList(accounts);
@@ -244,7 +243,7 @@ public class AccountControllerTest {
         when(service.findAllAccounts()).thenReturn(accountList);
 
         mockMvc.perform(get("/rest/accounts").param("name", "accountA"))
-                .andExpect(jsonPath("$.accounts[*].name",
+                .andExpect(jsonPath("$.accounts[*].username",
                         everyItem(endsWith("accountA"))))
                 .andExpect(status().isOk());
     }
@@ -256,14 +255,14 @@ public class AccountControllerTest {
         Account accountA = new Account();
         accountA.setId(1L);
         accountA.setPassword("accountA");
-        accountA.setName("accountA");
+        accountA.setUsername("accountA");
         accountA.setRole(Role.GUEST.getValue());
         accounts.add(accountA);
 
         Account accountB = new Account();
         accountB.setId(1L);
         accountB.setPassword("accountB");
-        accountB.setName("accountB");
+        accountB.setUsername("accountB");
         accountB.setRole(Role.GUEST.getValue());
         accounts.add(accountB);
 
