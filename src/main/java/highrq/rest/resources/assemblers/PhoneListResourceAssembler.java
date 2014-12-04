@@ -5,9 +5,11 @@ import highrq.rest.mvc.PhoneController;
 import highrq.rest.resources.PhoneListResource;
 import highrq.rest.resources.PhoneResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class PhoneListResourceAssembler extends ResourceAssemblerSupport<PhoneList, PhoneListResource> {
 
     public PhoneListResourceAssembler() {

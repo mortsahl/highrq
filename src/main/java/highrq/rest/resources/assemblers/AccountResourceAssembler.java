@@ -1,12 +1,15 @@
 package highrq.rest.resources.assemblers;
 
+import highrq.core.models.entities.Account;
 import highrq.rest.mvc.AccountController;
 import highrq.rest.resources.AccountResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
-import highrq.core.models.entities.Account;
+import org.springframework.stereotype.Component;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+@Component
 public class AccountResourceAssembler extends ResourceAssemblerSupport<Account, AccountResource> {
     public AccountResourceAssembler() {
         super(AccountController.class, AccountResource.class);

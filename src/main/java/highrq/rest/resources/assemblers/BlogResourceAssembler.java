@@ -5,9 +5,11 @@ import highrq.rest.resources.BlogResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import highrq.core.models.entities.Blog;
 import highrq.rest.mvc.BlogController;
+import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
+@Component
 public class BlogResourceAssembler extends ResourceAssemblerSupport<Blog, BlogResource> {
     public BlogResourceAssembler() {
         super(BlogController.class, BlogResource.class);

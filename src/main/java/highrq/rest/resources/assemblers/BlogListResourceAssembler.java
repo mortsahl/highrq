@@ -4,7 +4,9 @@ import highrq.rest.resources.BlogListResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import highrq.core.services.util.BlogList;
 import highrq.rest.mvc.BlogController;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BlogListResourceAssembler extends ResourceAssemblerSupport<BlogList, BlogListResource> {
 
     public BlogListResourceAssembler()

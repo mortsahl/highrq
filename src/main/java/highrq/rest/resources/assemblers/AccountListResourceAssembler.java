@@ -1,14 +1,15 @@
 package highrq.rest.resources.assemblers;
 
-import highrq.rest.resources.AccountListResource;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import highrq.core.services.util.AccountList;
 import highrq.rest.mvc.AccountController;
+import highrq.rest.resources.AccountListResource;
 import highrq.rest.resources.AccountResource;
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@Component
 public class AccountListResourceAssembler extends ResourceAssemblerSupport<AccountList, AccountListResource> {
 
     public AccountListResourceAssembler() {

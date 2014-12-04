@@ -6,9 +6,11 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import highrq.rest.mvc.BlogController;
 import highrq.rest.resources.BlogEntryResource;
+import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
+@Component
 public class BlogEntryResourceAssembler extends ResourceAssemblerSupport<BlogEntry, BlogEntryResource> {
 
     public BlogEntryResourceAssembler() {
