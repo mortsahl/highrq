@@ -18,7 +18,9 @@ public class AccountResourceAssembler extends ResourceAssemblerSupport<Account, 
     @Override
     public AccountResource toResource(Account account) {
         AccountResource resource = new AccountResource();
-        resource.setName(account.getUsername());
+        resource.setUsername(account.getUsername());
+        resource.setFname(account.getFname());
+        resource.setLname(account.getLname());
         resource.setPassword(account.getPassword());
         resource.setRole((account.getRole()));
         resource.add(linkTo(methodOn(AccountController.class).getAccount(account.getId())).withSelfRel());

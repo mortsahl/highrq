@@ -15,10 +15,10 @@ public class Account {
     @GeneratedValue
     private Long id;
     private String username;
+    private String fname;
+    private String lname;
     private String password;
     private String role;
-
-    // TODO - sja: Need firstname/lastname"
 
     public Account() {}
     public Account(String username, String password, String role) {
@@ -59,9 +59,25 @@ public class Account {
         this.role = role;
     }
 
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, role);
+        return Objects.hash(id, username, fname, lname, password, role);
     }
 
     @Override
@@ -73,6 +89,6 @@ public class Account {
             return false;
         }
         final Account other = (Account) obj;
-        return Objects.equals(this.id, other.id) && Objects.equals(this.username, other.username) && Objects.equals(this.password, other.password) && Objects.equals(this.role, other.role);
+        return Objects.equals(this.id, other.id) && Objects.equals(this.username, other.username) && Objects.equals(this.fname, other.fname) && Objects.equals(this.lname, other.lname) && Objects.equals(this.password, other.password) && Objects.equals(this.role, other.role);
     }
 }

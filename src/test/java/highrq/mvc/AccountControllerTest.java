@@ -144,10 +144,10 @@ public class AccountControllerTest {
         when(service.createAccount(any(Account.class))).thenReturn(createdAccount);
 
         mockMvc.perform(post("/rest/accounts")
-                .content("{\"name\":\"test\",\"password\":\"test\"}")
+                .content("{\"username\":\"test\",\"password\":\"test\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(header().string("Location", endsWith("/rest/accounts/1")))
-                .andExpect(jsonPath("$.name", is(createdAccount.getUsername())))
+                .andExpect(jsonPath("$.username", is(createdAccount.getUsername())))
                 .andExpect(status().isCreated());
 
         verify(service).createAccount(accountCaptor.capture());
@@ -166,7 +166,7 @@ public class AccountControllerTest {
         when(service.createAccount(any(Account.class))).thenThrow(new AccountExistsException());
 
         mockMvc.perform(post("/rest/accounts")
-                .content("{\"name\":\"test\",\"password\":\"test\"}")
+                .content("{\"username\":\"test\",\"password\":\"test\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isConflict());
     }
@@ -183,7 +183,7 @@ public class AccountControllerTest {
         mockMvc.perform(get("/rest/accounts/1"))
 //                .andDo(print())
                 .andExpect(jsonPath("$.password", is(nullValue())))
-                .andExpect(jsonPath("$.name", is(foundAccount.getUsername())))
+                .andExpect(jsonPath("$.username", is(foundAccount.getUsername())))
                 .andExpect(jsonPath("$.links[*].rel",
                         hasItems(endsWith("self"), endsWith("blogs"))))
                         .andExpect(status().isOk());
@@ -218,7 +218,7 @@ public class AccountControllerTest {
         when(service.findAllAccounts()).thenReturn(accountList);
 
         mockMvc.perform(get("/rest/accounts"))
-                .andExpect(jsonPath("$.accounts[*].name", hasItems(endsWith("accountA"), endsWith("accountB"))))
+                .andExpect(jsonPath("$.accounts[*].username", hasItems(endsWith("accountA"), endsWith("accountB"))))
                 .andExpect(status().isOk());
     }
 
@@ -242,9 +242,8 @@ public class AccountControllerTest {
 
         when(service.findAllAccounts()).thenReturn(accountList);
 
-        mockMvc.perform(get("/rest/accounts").param("name", "accountA"))
-                .andExpect(jsonPath("$.accounts[*].username",
-                        everyItem(endsWith("accountA"))))
+        mockMvc.perform(get("/rest/accounts").param("username", "accountA"))
+                .andExpect(jsonPath("$.accounts[*].username", everyItem(endsWith("accountA"))))
                 .andExpect(status().isOk());
     }
 
@@ -270,7 +269,7 @@ public class AccountControllerTest {
         when(service.findAccountsByRole(Role.GUEST.getValue())).thenReturn(accountList);
 
         mockMvc.perform(get("/rest/accounts/role/Guest"))
-                .andExpect(jsonPath("$.accounts[*].name", hasItems(endsWith("accountA"), endsWith("accountB"))))
+                .andExpect(jsonPath("$.accounts[*].username", hasItems(endsWith("accountA"), endsWith("accountB"))))
                 .andExpect(status().isOk());
     }
 }
