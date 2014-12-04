@@ -5,7 +5,6 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import highrq.core.services.util.BlogList;
 import highrq.rest.mvc.BlogController;
 
-
 public class BlogListResourceAsm extends ResourceAssemblerSupport<BlogList, BlogListResource> {
 
     public BlogListResourceAsm()

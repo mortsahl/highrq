@@ -7,7 +7,6 @@ import highrq.core.models.entities.Account;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
-
 public class AccountResourceAsm extends ResourceAssemblerSupport<Account, AccountResource> {
     public AccountResourceAsm() {
         super(AccountController.class, AccountResource.class);

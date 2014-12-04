@@ -32,6 +32,7 @@ import java.util.Arrays;
 @Controller
 @RequestMapping("/rest/accounts")
 public class AccountController {
+
     private AccountService accountService;
 
     @Autowired
@@ -114,7 +115,6 @@ public class AccountController {
         }
     }
 
-    // TODO: - sja: Implement findAccountsByRole();
     @RequestMapping(value = "/role/{role}", method = RequestMethod.GET)
     public ResponseEntity<AccountListResource> findAccountsByRole(@PathVariable String role) {
         try {

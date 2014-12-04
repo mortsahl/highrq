@@ -10,7 +10,6 @@ import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
-
 public class BlogEntryListResourceAsm extends ResourceAssemblerSupport<BlogEntryList, BlogEntryListResource> {
     public BlogEntryListResourceAsm() {
         super(BlogController.class, BlogEntryListResource.class);

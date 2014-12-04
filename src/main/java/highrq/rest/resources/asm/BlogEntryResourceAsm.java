@@ -8,7 +8,6 @@ import highrq.rest.mvc.BlogController;
 import highrq.rest.resources.BlogEntryResource;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
-
 public class BlogEntryResourceAsm extends ResourceAssemblerSupport<BlogEntry, BlogEntryResource> {
 
     public BlogEntryResourceAsm()
