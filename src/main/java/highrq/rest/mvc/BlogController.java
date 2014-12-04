@@ -9,9 +9,9 @@ import highrq.rest.exceptions.NotFoundException;
 import highrq.rest.resources.BlogEntryResource;
 import highrq.rest.resources.BlogListResource;
 import highrq.rest.resources.BlogResource;
-import highrq.rest.resources.asm.BlogEntryResourceAsm;
-import highrq.rest.resources.asm.BlogListResourceAsm;
-import highrq.rest.resources.asm.BlogResourceAsm;
+import highrq.rest.resources.assemblers.BlogEntryResourceAssembler;
+import highrq.rest.resources.assemblers.BlogListResourceAssembler;
+import highrq.rest.resources.assemblers.BlogResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import highrq.core.services.util.BlogList;
 import highrq.rest.resources.BlogEntryListResource;
-import highrq.rest.resources.asm.BlogEntryListResourceAsm;
+import highrq.rest.resources.assemblers.BlogEntryListResourceAssembler;
 
 import java.net.URI;
 
@@ -41,7 +41,7 @@ public class BlogController {
     public ResponseEntity<BlogListResource> findAllBlogs()
     {
         BlogList blogList = blogService.findAllBlogs();
-        BlogListResource blogListRes = new BlogListResourceAsm().toResource(blogList);
+        BlogListResource blogListRes = new BlogListResourceAssembler().toResource(blogList);
         return new ResponseEntity<BlogListResource>(blogListRes, HttpStatus.OK);
     }
 
@@ -51,7 +51,7 @@ public class BlogController {
     {
         Blog blog = blogService.findBlog(blogId);
         if(blog != null) {
-            BlogResource res = new BlogResourceAsm().toResource(blog);
+            BlogResource res = new BlogResourceAssembler().toResource(blog);
             return new ResponseEntity<BlogResource>(res, HttpStatus.OK);
         } else {
             return new ResponseEntity<BlogResource>(HttpStatus.NOT_FOUND);
@@ -67,7 +67,7 @@ public class BlogController {
         BlogEntry createdBlogEntry = null;
         try {
             createdBlogEntry = blogService.createBlogEntry(blogId, sentBlogEntry.toBlogEntry());
-            BlogEntryResource createdResource = new BlogEntryResourceAsm().toResource(createdBlogEntry);
+            BlogEntryResource createdResource = new BlogEntryResourceAssembler().toResource(createdBlogEntry);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(URI.create(createdResource.getLink("self").getHref()));
             return new ResponseEntity<BlogEntryResource>(createdResource, headers, HttpStatus.CREATED);
@@ -82,7 +82,7 @@ public class BlogController {
     {
         try {
             BlogEntryList list = blogService.findAllBlogEntries(blogId);
-            BlogEntryListResource res = new BlogEntryListResourceAsm().toResource(list);
+            BlogEntryListResource res = new BlogEntryListResourceAssembler().toResource(list);
             return new ResponseEntity<BlogEntryListResource>(res, HttpStatus.OK);
         } catch(BlogNotFoundException exception)
         {

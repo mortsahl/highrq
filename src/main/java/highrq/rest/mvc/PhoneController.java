@@ -5,7 +5,7 @@ import highrq.core.services.PhoneService;
 import highrq.core.services.exceptions.PhoneExistsException;
 import highrq.rest.exceptions.ConflictException;
 import highrq.rest.resources.PhoneResource;
-import highrq.rest.resources.asm.PhoneResourceAsm;
+import highrq.rest.resources.assemblers.PhoneResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,7 @@ public class PhoneController {
 
         try {
             Phone createdPhone = service.createPhone(sentPhone.toPhone());
-            PhoneResource res = new PhoneResourceAsm().toResource(createdPhone);
+            PhoneResource res = new PhoneResourceAssembler().toResource(createdPhone);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(URI.create(res.getLink("self").getHref()));
             return new ResponseEntity<PhoneResource>(res, headers, HttpStatus.CREATED);
@@ -49,7 +49,7 @@ public class PhoneController {
 
         Phone phone = service.findPhone(phoneId);
         if (phone != null) {
-            PhoneResource res = new PhoneResourceAsm().toResource(phone);
+            PhoneResource res = new PhoneResourceAssembler().toResource(phone);
             return new ResponseEntity<PhoneResource>(res, HttpStatus.OK);
         } else {
             return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);
@@ -61,7 +61,7 @@ public class PhoneController {
 
         Phone phone = service.deletePhone(phoneId);
         if (phone != null) {
-            PhoneResource resource = new PhoneResourceAsm().toResource(phone);
+            PhoneResource resource = new PhoneResourceAssembler().toResource(phone);
             return new ResponseEntity<PhoneResource>(resource, HttpStatus.OK);
         } else {
             return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);
@@ -74,7 +74,7 @@ public class PhoneController {
         Phone updatedEntry = service.updatePhone(sentPhone.toPhone());
 
         if (updatedEntry != null) {
-            PhoneResource resource = new PhoneResourceAsm().toResource(updatedEntry);
+            PhoneResource resource = new PhoneResourceAssembler().toResource(updatedEntry);
             return new ResponseEntity<PhoneResource>(resource, HttpStatus.OK);
         } else {
             return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);

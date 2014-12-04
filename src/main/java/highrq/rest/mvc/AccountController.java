@@ -14,10 +14,10 @@ import highrq.rest.resources.AccountListResource;
 import highrq.rest.resources.AccountResource;
 import highrq.rest.resources.BlogListResource;
 import highrq.rest.resources.BlogResource;
-import highrq.rest.resources.asm.AccountListResourceAsm;
-import highrq.rest.resources.asm.AccountResourceAsm;
-import highrq.rest.resources.asm.BlogListResourceAsm;
-import highrq.rest.resources.asm.BlogResourceAsm;
+import highrq.rest.resources.assemblers.AccountListResourceAssembler;
+import highrq.rest.resources.assemblers.AccountResourceAssembler;
+import highrq.rest.resources.assemblers.BlogListResourceAssembler;
+import highrq.rest.resources.assemblers.BlogResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -56,7 +56,7 @@ public class AccountController {
                 list = new AccountList(Arrays.asList(account));
             }
         }
-        AccountListResource res = new AccountListResourceAsm().toResource(list);
+        AccountListResource res = new AccountListResourceAssembler().toResource(list);
         return new ResponseEntity<AccountListResource>(res, HttpStatus.OK);
     }
 
@@ -64,7 +64,7 @@ public class AccountController {
     public ResponseEntity<AccountResource> createAccount(@RequestBody AccountResource sentAccount) {
         try {
             Account createdAccount = accountService.createAccount(sentAccount.toAccount());
-            AccountResource res = new AccountResourceAsm().toResource(createdAccount);
+            AccountResource res = new AccountResourceAssembler().toResource(createdAccount);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(URI.create(res.getLink("self").getHref()));
             return new ResponseEntity<AccountResource>(res, headers, HttpStatus.CREATED);
@@ -78,7 +78,7 @@ public class AccountController {
     public ResponseEntity<AccountResource> getAccount(@PathVariable Long accountId) {
         Account account = accountService.findAccount(accountId);
         if (account != null) {
-            AccountResource res = new AccountResourceAsm().toResource(account);
+            AccountResource res = new AccountResourceAssembler().toResource(account);
             return new ResponseEntity<AccountResource>(res, HttpStatus.OK);
         }
         else {
@@ -90,7 +90,7 @@ public class AccountController {
     public ResponseEntity<BlogResource> createBlog(@PathVariable Long accountId, @RequestBody BlogResource res) {
         try {
             Blog createdBlog = accountService.createBlog(accountId, res.toBlog());
-            BlogResource createdBlogRes = new BlogResourceAsm().toResource(createdBlog);
+            BlogResource createdBlogRes = new BlogResourceAssembler().toResource(createdBlog);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(URI.create(createdBlogRes.getLink("self").getHref()));
             return new ResponseEntity<BlogResource>(createdBlogRes, headers, HttpStatus.CREATED);
@@ -107,7 +107,7 @@ public class AccountController {
     public ResponseEntity<BlogListResource> findAllBlogs(@PathVariable Long accountId) {
         try {
             BlogList blogList = accountService.findBlogsByAccount(accountId);
-            BlogListResource blogListRes = new BlogListResourceAsm().toResource(blogList);
+            BlogListResource blogListRes = new BlogListResourceAssembler().toResource(blogList);
             return new ResponseEntity<BlogListResource>(blogListRes, HttpStatus.OK);
         }
         catch (AccountDoesNotExistException exception) {
@@ -119,7 +119,7 @@ public class AccountController {
     public ResponseEntity<AccountListResource> findAccountsByRole(@PathVariable String role) {
         try {
             AccountList accountList = accountService.findAccountsByRole(role);
-            AccountListResource accountListRes = new AccountListResourceAsm().toResource(accountList);
+            AccountListResource accountListRes = new AccountListResourceAssembler().toResource(accountList);
             return new ResponseEntity<AccountListResource>(accountListRes, HttpStatus.OK);
         }
         catch (AccountDoesNotExistException exception) {

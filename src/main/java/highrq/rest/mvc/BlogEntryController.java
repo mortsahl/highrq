@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import highrq.core.models.entities.BlogEntry;
 import highrq.core.services.BlogEntryService;
 import highrq.rest.resources.BlogEntryResource;
-import highrq.rest.resources.asm.BlogEntryResourceAsm;
+import highrq.rest.resources.assemblers.BlogEntryResourceAssembler;
 
 @Controller
 @RequestMapping("/rest/blog-entries")
@@ -28,7 +28,7 @@ public class BlogEntryController {
         BlogEntry entry = service.findBlogEntry(blogEntryId);
         if(entry != null)
         {
-            BlogEntryResource res = new BlogEntryResourceAsm().toResource(entry);
+            BlogEntryResource res = new BlogEntryResourceAssembler().toResource(entry);
             return new ResponseEntity<BlogEntryResource>(res, HttpStatus.OK);
         } else {
             return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
@@ -42,7 +42,7 @@ public class BlogEntryController {
         BlogEntry entry = service.deleteBlogEntry(blogEntryId);
         if(entry != null)
         {
-            BlogEntryResource res = new BlogEntryResourceAsm().toResource(entry);
+            BlogEntryResource res = new BlogEntryResourceAssembler().toResource(entry);
             return new ResponseEntity<BlogEntryResource>(res, HttpStatus.OK);
         } else {
             return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
@@ -56,7 +56,7 @@ public class BlogEntryController {
         BlogEntry updatedEntry = service.updateBlogEntry(blogEntryId, sentBlogEntry.toBlogEntry());
         if(updatedEntry != null)
         {
-            BlogEntryResource res = new BlogEntryResourceAsm().toResource(updatedEntry);
+            BlogEntryResource res = new BlogEntryResourceAssembler().toResource(updatedEntry);
             return new ResponseEntity<BlogEntryResource>(res, HttpStatus.OK);
         } else {
             return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
