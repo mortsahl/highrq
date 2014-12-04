@@ -7,7 +7,7 @@ import java.util.Objects;
 @Table(name = "phone")
 @NamedQueries({
         @NamedQuery(name = "Phone.findPhonesByAreaCode", query = "Select p from Phone p where p.areaCode=:areaCode"),
-        @NamedQuery(name = "Phone.findPhonesByAccount", query = "Select p, a from Phone p, Account a where a.id = p.accountId")
+        @NamedQuery(name = "Phone.findPhonesByAccountId", query = "Select p, a from Phone p, Account a where a.id = p.accountId")
 })
 
 public class Phone {

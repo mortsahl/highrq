@@ -43,6 +43,8 @@ public class AccountController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<AccountListResource> findAllAccounts(@RequestParam(value = "username", required = false) String username) {
 
+        // TODO - sja: Need id in response
+
         AccountList list = null;
         if (username == null) {
             list = accountService.findAllAccounts();
