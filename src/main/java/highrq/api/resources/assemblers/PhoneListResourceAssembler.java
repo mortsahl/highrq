@@ -1,9 +1,9 @@
-package highrq.rest.resources.assemblers;
+package highrq.api.resources.assemblers;
 
 import highrq.core.services.util.PhoneList;
-import highrq.rest.mvc.PhoneController;
-import highrq.rest.resources.PhoneListResource;
-import highrq.rest.resources.PhoneResource;
+import highrq.api.mvc.PhoneController;
+import highrq.api.resources.PhoneListResource;
+import highrq.api.resources.PhoneResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 

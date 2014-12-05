@@ -1,17 +1,17 @@
-package highrq.rest.mvc;
+package highrq.api.mvc;
 
 import highrq.core.models.entities.Blog;
 import highrq.core.models.entities.BlogEntry;
 import highrq.core.services.BlogService;
 import highrq.core.services.exceptions.BlogNotFoundException;
 import highrq.core.services.util.BlogEntryList;
-import highrq.rest.exceptions.NotFoundException;
-import highrq.rest.resources.BlogEntryResource;
-import highrq.rest.resources.BlogListResource;
-import highrq.rest.resources.BlogResource;
-import highrq.rest.resources.assemblers.BlogEntryResourceAssembler;
-import highrq.rest.resources.assemblers.BlogListResourceAssembler;
-import highrq.rest.resources.assemblers.BlogResourceAssembler;
+import highrq.api.exceptions.NotFoundException;
+import highrq.api.resources.BlogEntryResource;
+import highrq.api.resources.BlogListResource;
+import highrq.api.resources.BlogResource;
+import highrq.api.resources.assemblers.BlogEntryResourceAssembler;
+import highrq.api.resources.assemblers.BlogListResourceAssembler;
+import highrq.api.resources.assemblers.BlogResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import highrq.core.services.util.BlogList;
-import highrq.rest.resources.BlogEntryListResource;
-import highrq.rest.resources.assemblers.BlogEntryListResourceAssembler;
+import highrq.api.resources.BlogEntryListResource;
+import highrq.api.resources.assemblers.BlogEntryListResourceAssembler;
 
 import java.net.URI;
 
 @Controller
-@RequestMapping("/rest/blogs")
+@RequestMapping("/api/blogs")
 public class BlogController {
     private BlogService blogService;
 

@@ -1,9 +1,9 @@
-package highrq.rest.resources.assemblers;
+package highrq.api.resources.assemblers;
 
 import highrq.core.models.entities.Phone;
-import highrq.rest.mvc.AccountController;
-import highrq.rest.mvc.PhoneController;
-import highrq.rest.resources.PhoneResource;
+import highrq.api.mvc.AccountController;
+import highrq.api.mvc.PhoneController;
+import highrq.api.resources.PhoneResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 

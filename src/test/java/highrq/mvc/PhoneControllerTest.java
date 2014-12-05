@@ -5,7 +5,7 @@ import highrq.core.models.entities.enums.PhoneType;
 import highrq.core.services.AccountService;
 import highrq.core.services.PhoneService;
 import highrq.core.services.exceptions.PhoneExistsException;
-import highrq.rest.mvc.PhoneController;
+import highrq.api.mvc.PhoneController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -65,10 +65,10 @@ public class PhoneControllerTest {
 
         when(service.createPhone(any(Phone.class))).thenReturn(createdPhone);
 
-        mockMvc.perform(post("/rest/phones")
+        mockMvc.perform(post("/api/phones")
                 .content("{\"areaCode\": \"303\",\"prefix\":\"987\", \"body\": \"5678\", \"ext\": \"12345\", \"type\" : \"Cell\", \"type\": \"Cell\"}")  // TODO - sja: Need accountId in test
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(header().string("Location", org.hamcrest.Matchers.endsWith("/rest/phones/1")))
+                .andExpect(header().string("Location", org.hamcrest.Matchers.endsWith("/api/phones/1")))
                 .andExpect(jsonPath("$.areaCode", is(createdPhone.getAreaCode())))
                 .andExpect(jsonPath("$.type", is(createdPhone.getType())))
  //               .andExpect(jsonPath("$.accountId", is(createdPhone.getAccountId())))
@@ -89,7 +89,7 @@ public class PhoneControllerTest {
 
         when(service.createPhone(any(Phone.class))).thenThrow(new PhoneExistsException());
 
-        mockMvc.perform(post("/rest/phones")
+        mockMvc.perform(post("/api/phones")
                 .content("{\"areaCode\":\"303\",\"body\":\"5678\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isConflict());
@@ -107,7 +107,7 @@ public class PhoneControllerTest {
 
         when(service.findPhone(1L)).thenReturn(foundPhone);
 
-        mockMvc.perform(get("/rest/phones/1"))
+        mockMvc.perform(get("/api/phones/1"))
 //      .andDo(print())
                 .andExpect(jsonPath("$.areaCode", is(foundPhone.getAreaCode())))
                 .andExpect(jsonPath("$.prefix", is(foundPhone.getPrefix())))
@@ -122,7 +122,7 @@ public class PhoneControllerTest {
     public void getNonExistingPhone() throws Exception {
         when(service.findPhone(1L)).thenReturn(null);
 
-        mockMvc.perform(get("/rest/phones/1"))
+        mockMvc.perform(get("/api/phones/1"))
                 .andExpect(status().isNotFound());
     }
 
@@ -135,7 +135,7 @@ public class PhoneControllerTest {
 
         when(service.deletePhone(1L)).thenReturn(deletedPhone);
 
-        mockMvc.perform(delete("/rest/phones/1"))
+        mockMvc.perform(delete("/api/phones/1"))
                 .andExpect(jsonPath("$.areaCode", is(deletedPhone.getAreaCode())))
                 .andExpect(jsonPath("$.ext", is(deletedPhone.getExt())))
                 .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/phones/1"))))

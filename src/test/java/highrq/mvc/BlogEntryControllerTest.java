@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import highrq.core.models.entities.Blog;
 import highrq.core.models.entities.BlogEntry;
 import highrq.core.services.BlogEntryService;
-import highrq.rest.mvc.BlogEntryController;
+import highrq.api.mvc.BlogEntryController;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Matchers.any;
@@ -50,7 +50,7 @@ public class BlogEntryControllerTest {
 
         when(service.findBlogEntry(1L)).thenReturn(entry);
 
-        mockMvc.perform(get("/rest/blog-entries/1"))
+        mockMvc.perform(get("/api/blog-entries/1"))
                 .andExpect(jsonPath("$.title", is(entry.getTitle())))
                 .andExpect(jsonPath("$.links[*].href",
                         hasItems(endsWith("/blogs/1"), endsWith("/blog-entries/1"))))
@@ -63,7 +63,7 @@ public class BlogEntryControllerTest {
     public void getNonExistingBlogEntry() throws Exception {
         when(service.findBlogEntry(1L)).thenReturn(null);
 
-        mockMvc.perform(get("/rest/blog-entries/1"))
+        mockMvc.perform(get("/api/blog-entries/1"))
            .andExpect(status().isNotFound());
     }
 
@@ -76,7 +76,7 @@ public class BlogEntryControllerTest {
 
         when(service.deleteBlogEntry(1L)).thenReturn(deletedBlogEntry);
 
-        mockMvc.perform(delete("/rest/blog-entries/1"))
+        mockMvc.perform(delete("/api/blog-entries/1"))
                 .andExpect(jsonPath("$.title", is(deletedBlogEntry.getTitle())))
                 .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/blog-entries/1"))))
                 .andExpect(status().isOk());
@@ -86,7 +86,7 @@ public class BlogEntryControllerTest {
     public void deleteNonExistingBlogEntry() throws Exception {
         when(service.deleteBlogEntry(1L)).thenReturn(null);
 
-        mockMvc.perform(delete("/rest/blog-entries/1"))
+        mockMvc.perform(delete("/api/blog-entries/1"))
                 .andExpect(status().isNotFound());
     }
 
@@ -99,7 +99,7 @@ public class BlogEntryControllerTest {
         when(service.updateBlogEntry(eq(1L), any(BlogEntry.class)))
                 .thenReturn(updatedEntry);
 
-        mockMvc.perform(put("/rest/blog-entries/1")
+        mockMvc.perform(put("/api/blog-entries/1")
                 .content("{\"title\":\"Test Title\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.title", is(updatedEntry.getTitle())))
@@ -112,7 +112,7 @@ public class BlogEntryControllerTest {
         when(service.updateBlogEntry(eq(1L), any(BlogEntry.class)))
                 .thenReturn(null);
 
-        mockMvc.perform(put("/rest/blog-entries/1")
+        mockMvc.perform(put("/api/blog-entries/1")
                 .content("{\"title\":\"Test Title\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());

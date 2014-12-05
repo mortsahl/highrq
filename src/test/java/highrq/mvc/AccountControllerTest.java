@@ -9,7 +9,7 @@ import highrq.core.services.exceptions.AccountExistsException;
 import highrq.core.services.exceptions.BlogExistsException;
 import highrq.core.services.util.AccountList;
 import highrq.core.services.util.BlogList;
-import highrq.rest.mvc.AccountController;
+import highrq.api.mvc.AccountController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -68,7 +68,7 @@ public class AccountControllerTest {
 
         when(service.findBlogsByAccount(1L)).thenReturn(blogList);
 
-        mockMvc.perform(get("/rest/accounts/1/blogs"))
+        mockMvc.perform(get("/api/accounts/1/blogs"))
                 .andExpect(jsonPath("$.blogs[*].title",
                         hasItems(endsWith("Title A"), endsWith("Title B"))))
                 .andExpect(status().isOk());
@@ -92,7 +92,7 @@ public class AccountControllerTest {
 
         when(service.findBlogsByAccount(1L)).thenThrow(new AccountDoesNotExistException());
 
-        mockMvc.perform(get("/rest/accounts/1/blogs"))
+        mockMvc.perform(get("/api/accounts/1/blogs"))
                 .andExpect(status().isNotFound());
     }
 
@@ -104,7 +104,7 @@ public class AccountControllerTest {
 
         when(service.createBlog(eq(1L), any(Blog.class))).thenReturn(createdBlog);
 
-        mockMvc.perform(post("/rest/accounts/1/blogs")
+        mockMvc.perform(post("/api/accounts/1/blogs")
                 .content("{\"title\":\"Test Title\"}")
                 .contentType(MediaType.APPLICATION_JSON))
 //                .andDo(print())
@@ -118,7 +118,7 @@ public class AccountControllerTest {
     public void createBlogNonExistingAccount() throws Exception {
         when(service.createBlog(eq(1L), any(Blog.class))).thenThrow(new AccountDoesNotExistException());
 
-        mockMvc.perform(post("/rest/accounts/1/blogs")
+        mockMvc.perform(post("/api/accounts/1/blogs")
                 .content("{\"title\":\"Test Title\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -128,7 +128,7 @@ public class AccountControllerTest {
     public void createBlogExistingBlogName() throws Exception {
         when(service.createBlog(eq(1L), any(Blog.class))).thenThrow(new BlogExistsException());
 
-        mockMvc.perform(post("/rest/accounts/1/blogs")
+        mockMvc.perform(post("/api/accounts/1/blogs")
                 .content("{\"title\":\"Test Title\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isConflict());
@@ -143,10 +143,10 @@ public class AccountControllerTest {
 
         when(service.createAccount(any(Account.class))).thenReturn(createdAccount);
 
-        mockMvc.perform(post("/rest/accounts")
+        mockMvc.perform(post("/api/accounts")
                 .content("{\"username\":\"test\",\"password\":\"test\"}")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(header().string("Location", endsWith("/rest/accounts/1")))
+                .andExpect(header().string("Location", endsWith("/api/accounts/1")))
                 .andExpect(jsonPath("$.username", is(createdAccount.getUsername())))
                 .andExpect(status().isCreated());
 
@@ -165,7 +165,7 @@ public class AccountControllerTest {
 
         when(service.createAccount(any(Account.class))).thenThrow(new AccountExistsException());
 
-        mockMvc.perform(post("/rest/accounts")
+        mockMvc.perform(post("/api/accounts")
                 .content("{\"username\":\"test\",\"password\":\"test\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isConflict());
@@ -180,7 +180,7 @@ public class AccountControllerTest {
 
         when(service.findAccount(1L)).thenReturn(foundAccount);
 
-        mockMvc.perform(get("/rest/accounts/1"))
+        mockMvc.perform(get("/api/accounts/1"))
 //                .andDo(print())
                 .andExpect(jsonPath("$.password", is(nullValue())))
                 .andExpect(jsonPath("$.username", is(foundAccount.getUsername())))
@@ -193,7 +193,7 @@ public class AccountControllerTest {
     public void getNonExistingAccount() throws Exception {
         when(service.findAccount(1L)).thenReturn(null);
 
-        mockMvc.perform(get("/rest/accounts/1"))
+        mockMvc.perform(get("/api/accounts/1"))
                 .andExpect(status().isNotFound());
     }
 
@@ -217,7 +217,7 @@ public class AccountControllerTest {
 
         when(service.findAllAccounts()).thenReturn(accountList);
 
-        mockMvc.perform(get("/rest/accounts"))
+        mockMvc.perform(get("/api/accounts"))
                 .andExpect(jsonPath("$.accounts[*].username", hasItems(endsWith("accountA"), endsWith("accountB"))))
                 .andExpect(status().isOk());
     }
@@ -242,7 +242,7 @@ public class AccountControllerTest {
 
         when(service.findAllAccounts()).thenReturn(accountList);
 
-        mockMvc.perform(get("/rest/accounts").param("username", "accountA"))
+        mockMvc.perform(get("/api/accounts").param("username", "accountA"))
                 .andExpect(jsonPath("$.accounts[*].username", everyItem(endsWith("accountA"))))
                 .andExpect(status().isOk());
     }
@@ -268,7 +268,7 @@ public class AccountControllerTest {
         AccountList accountList = new AccountList(accounts);
         when(service.findAccountsByRole(Role.GUEST.getValue())).thenReturn(accountList);
 
-        mockMvc.perform(get("/rest/accounts/role/Guest"))
+        mockMvc.perform(get("/api/accounts/role/Guest"))
                 .andExpect(jsonPath("$.accounts[*].username", hasItems(endsWith("accountA"), endsWith("accountB"))))
                 .andExpect(status().isOk());
     }

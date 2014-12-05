@@ -1,11 +1,11 @@
-package highrq.rest.resources.assemblers;
+package highrq.api.resources.assemblers;
 
 import highrq.core.models.entities.BlogEntry;
-import highrq.rest.mvc.BlogEntryController;
+import highrq.api.mvc.BlogEntryController;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
-import highrq.rest.mvc.BlogController;
-import highrq.rest.resources.BlogEntryResource;
+import highrq.api.mvc.BlogController;
+import highrq.api.resources.BlogEntryResource;
 import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;

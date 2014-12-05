@@ -7,7 +7,7 @@ import highrq.core.services.BlogService;
 import highrq.core.services.exceptions.BlogNotFoundException;
 import highrq.core.services.util.BlogEntryList;
 import highrq.core.services.util.BlogList;
-import highrq.rest.mvc.BlogController;
+import highrq.api.mvc.BlogController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -62,7 +62,7 @@ public class BlogControllerTest {
 
         when(blogService.findAllBlogs()).thenReturn(allBlogs);
 
-        mockMvc.perform(get("/rest/blogs"))
+        mockMvc.perform(get("/api/blogs"))
                 .andExpect(jsonPath("$.blogs[*].title",
                         hasItems(endsWith("Title A"), endsWith("Title B"))))
                 .andExpect(status().isOk());
@@ -80,7 +80,7 @@ public class BlogControllerTest {
 
         when(blogService.findBlog(1L)).thenReturn(blog);
 
-        mockMvc.perform(get("/rest/blogs/1"))
+        mockMvc.perform(get("/api/blogs/1"))
                 .andExpect(jsonPath("$.links[*].href",
                         hasItem(endsWith("/blogs/1"))))
                 .andExpect(jsonPath("$.links[*].href",
@@ -97,7 +97,7 @@ public class BlogControllerTest {
     public void getNonExistingBlog() throws Exception {
         when(blogService.findBlog(1L)).thenReturn(null);
 
-        mockMvc.perform(get("/rest/blogs/1"))
+        mockMvc.perform(get("/api/blogs/1"))
                 .andExpect(status().isNotFound());
     }
 
@@ -112,12 +112,12 @@ public class BlogControllerTest {
 
         when(blogService.createBlogEntry(eq(1L), any(BlogEntry.class))).thenReturn(entry);
 
-        mockMvc.perform(post("/rest/blogs/1/blog-entries")
+        mockMvc.perform(post("/api/blogs/1/blog-entries")
                 .content("{\"title\":\"Generic Title\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.title", is(entry.getTitle())))
-                .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("rest/blog-entries/1"))))
-                .andExpect(header().string("Location", endsWith("rest/blog-entries/1")))
+                .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("api/blog-entries/1"))))
+                .andExpect(header().string("Location", endsWith("api/blog-entries/1")))
                 .andExpect(status().isCreated());
     }
 
@@ -125,7 +125,7 @@ public class BlogControllerTest {
     public void createBlogEntryNonExistingBlog() throws Exception {
         when(blogService.createBlogEntry(eq(1L), any(BlogEntry.class))).thenThrow(new BlogNotFoundException());
 
-        mockMvc.perform(post("/rest/blogs/1/blog-entries")
+        mockMvc.perform(post("/api/blogs/1/blog-entries")
                 .content("{\"title\":\"Generic Title\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -150,7 +150,7 @@ public class BlogControllerTest {
 
         when(blogService.findAllBlogEntries(1L)).thenReturn(list);
 
-        mockMvc.perform(get("/rest/blogs/1/blog-entries"))
+        mockMvc.perform(get("/api/blogs/1/blog-entries"))
 //                .andDo(print())
                 .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/blogs/1/blog-entries"))))
                 .andExpect(jsonPath("$.entries[*].title", hasItem(is("Test Title"))))
@@ -161,7 +161,7 @@ public class BlogControllerTest {
     public void listBlogEntriesForNonExistingBlog() throws Exception {
         when(blogService.findAllBlogEntries(1L)).thenThrow(new BlogNotFoundException());
 
-        mockMvc.perform(get("/rest/blogs/1/blog-entries"))
+        mockMvc.perform(get("/api/blogs/1/blog-entries"))
 //                .andDo(print())
                 .andExpect(status().isNotFound());
     }

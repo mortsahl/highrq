@@ -1,4 +1,4 @@
-package highrq.rest.exceptions;
+package highrq.api.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

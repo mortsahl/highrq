@@ -1,4 +1,4 @@
-package highrq.rest.resources;
+package highrq.api.resources;
 
 import highrq.core.models.entities.BlogEntry;
 import org.springframework.hateoas.ResourceSupport;

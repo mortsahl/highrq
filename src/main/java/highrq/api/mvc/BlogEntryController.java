@@ -1,4 +1,4 @@
-package highrq.rest.mvc;
+package highrq.api.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,11 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import highrq.core.models.entities.BlogEntry;
 import highrq.core.services.BlogEntryService;
-import highrq.rest.resources.BlogEntryResource;
-import highrq.rest.resources.assemblers.BlogEntryResourceAssembler;
+import highrq.api.resources.BlogEntryResource;
+import highrq.api.resources.assemblers.BlogEntryResourceAssembler;
 
 @Controller
-@RequestMapping("/rest/blog-entries")
+@RequestMapping("/api/blog-entries")
 public class BlogEntryController {
     private BlogEntryService service;
 

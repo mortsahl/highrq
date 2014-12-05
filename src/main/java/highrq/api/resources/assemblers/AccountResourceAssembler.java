@@ -1,8 +1,8 @@
-package highrq.rest.resources.assemblers;
+package highrq.api.resources.assemblers;
 
 import highrq.core.models.entities.Account;
-import highrq.rest.mvc.AccountController;
-import highrq.rest.resources.AccountResource;
+import highrq.api.mvc.AccountController;
+import highrq.api.resources.AccountResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
