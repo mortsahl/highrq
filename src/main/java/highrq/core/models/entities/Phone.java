@@ -6,8 +6,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "phone")
 @NamedQueries({
-        @NamedQuery(name = "Phone.findPhonesByAreaCode", query = "Select p from Phone p where p.areaCode=:areaCode"),
-        @NamedQuery(name = "Phone.findPhonesByAccountId", query = "Select p, a from Phone p, Account a where a.id = p.accountId")
+        @NamedQuery(name = "Phone.findPhonesByAreaCode", query = "Select p from Phone p where p.areaCode=:areaCode")
 })
 
 public class Phone {
@@ -20,23 +19,20 @@ public class Phone {
     private String body;
     private String ext;
     private String type;
-    private Long accountId;
 
-    public Phone(String areaCode, String prefix, String body, String ext, String type, Long accountId) {
+    public Phone(String areaCode, String prefix, String body, String ext, String type) {
         this.areaCode = areaCode;
         this.prefix = prefix;
         this.body = body;
         this.ext = ext;
         this.type = type;
-        this.accountId = accountId;
     }
 
-    public Phone(String areaCode, String prefix, String body, String type, Long accountId) {
+    public Phone(String areaCode, String prefix, String body, String type) {
         this.areaCode = areaCode;
         this.prefix = prefix;
         this.body = body;
         this.type = type;
-        this.accountId = accountId;
     }
 
     public Phone() {
@@ -86,19 +82,9 @@ public class Phone {
         return type;
     }
 
-    public Long getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
-
     public void setType(String type) {
         this.type = type;
     }
-
-
 
     public String getFormattedPhoneNumber() {
         StringBuilder sb = new StringBuilder(16);
@@ -111,7 +97,7 @@ public class Phone {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, areaCode, prefix, body, ext, type, accountId);
+        return Objects.hash(id, areaCode, prefix, body, ext, type);
     }
 
     @Override
@@ -123,6 +109,6 @@ public class Phone {
             return false;
         }
         final Phone other = (Phone) obj;
-        return Objects.equals(this.id, other.id) && Objects.equals(this.areaCode, other.areaCode) && Objects.equals(this.prefix, other.prefix) && Objects.equals(this.body, other.body) && Objects.equals(this.ext, other.ext) && Objects.equals(this.type, other.type) && Objects.equals(this.accountId, other.accountId);
+        return Objects.equals(this.id, other.id) && Objects.equals(this.areaCode, other.areaCode) && Objects.equals(this.prefix, other.prefix) && Objects.equals(this.body, other.body) && Objects.equals(this.ext, other.ext) && Objects.equals(this.type, other.type);
     }
 }

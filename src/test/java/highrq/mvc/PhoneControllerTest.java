@@ -43,7 +43,6 @@ public class PhoneControllerTest {
     private static final String BODY = "5678";
     private static final String EXT = "12345";
     private static final String TYPE = PhoneType.CELL.getValue();
-    private static final Long ACCOUNT_ID = 10L;
 
     @Before
     public void setup() {
@@ -61,7 +60,6 @@ public class PhoneControllerTest {
         createdPhone.setBody(BODY);
         createdPhone.setExt(EXT);
         createdPhone.setType(TYPE);
-        createdPhone.setAccountId(ACCOUNT_ID);
 
         when(service.createPhone(any(Phone.class))).thenReturn(createdPhone);
 

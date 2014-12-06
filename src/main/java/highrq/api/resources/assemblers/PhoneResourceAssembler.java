@@ -1,9 +1,8 @@
 package highrq.api.resources.assemblers;
 
-import highrq.core.models.entities.Phone;
-import highrq.api.mvc.AccountController;
 import highrq.api.mvc.PhoneController;
 import highrq.api.resources.PhoneResource;
+import highrq.core.models.entities.Phone;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -25,15 +24,10 @@ public class PhoneResourceAssembler extends ResourceAssemblerSupport<Phone, Phon
         phoneResource.setBody(phone.getBody());
         phoneResource.setExt(phone.getExt());
         phoneResource.setType(phone.getType());
-        phoneResource.setAccountId(phone.getAccountId());
 
         //  Link link =
         linkTo(PhoneController.class).slash(phone.getId()).withSelfRel();
         phoneResource.add(linkTo(methodOn(PhoneController.class).getPhone(phone.getId())).withSelfRel());
-
-        if (phone.getAccountId() != null) {
-            phoneResource.add(linkTo(AccountController.class).slash(phone.getAccountId()).withRel("owner"));
-        }
 
         return phoneResource;
     }

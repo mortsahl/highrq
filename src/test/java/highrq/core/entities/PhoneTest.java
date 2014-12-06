@@ -14,8 +14,8 @@ public class PhoneTest {
     private static final String BODY = "9876";
     private static final String EXT = "12345";
     private static final String TYPE = PhoneType.HOME.getValue();
-    private static final Long ACCOUNT_ID = 1L;
-    StringBuilder sb = new StringBuilder();
+
+    private StringBuilder sb = new StringBuilder();
 
     @Before
     public void Setup() {
@@ -24,13 +24,13 @@ public class PhoneTest {
 
     @Test
     public void testGetPhoneNumberWithExtension() {
-        Phone phone = new Phone(AREACODE, PREFIX, BODY, EXT, TYPE, ACCOUNT_ID);
+        Phone phone = new Phone(AREACODE, PREFIX, BODY, EXT, TYPE);
         assertEquals((sb.append("(").append(AREACODE).append(") ").append(PREFIX).append("-").append(BODY).append(" x").append(EXT)).toString(), phone.getFormattedPhoneNumber());
     }
 
     @Test
     public void testGetPhoneNumberWithoutExtension() {
-        Phone phone = new Phone(AREACODE, PREFIX, BODY, TYPE, ACCOUNT_ID);
+        Phone phone = new Phone(AREACODE, PREFIX, BODY, TYPE);
         assertEquals((sb.append("(").append(AREACODE).append(") ").append(PREFIX).append("-").append(BODY)).toString(), phone.getFormattedPhoneNumber());
     }
 }
