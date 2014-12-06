@@ -1,4 +1,4 @@
-package highrq.core.models.entities.enums;
+package highrq.core.models.entities.enums.tier1;
 
 public enum Race {
     WHITE("White"),
@@ -9,7 +9,7 @@ public enum Race {
     POLYNESIAN("Polynesian"),
     MIDEAST("Middle Eastern"),
     ARABIC("Arabic"),
-    MIXED("Nixed"),
+    MIXED("Mixed"),
     OTHER("Other");
 
     private String value;

@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring/spring-config.xml")
+@ContextConfiguration("classpath:spring/applicationConfig.xml")
 public class PhoneDAOTest {
     @Autowired
     private PhoneDAO dao;

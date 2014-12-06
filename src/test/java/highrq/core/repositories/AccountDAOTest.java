@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring/spring-config.xml")
+@ContextConfiguration("classpath:spring/applicationConfig.xml")
 public class AccountDAOTest {
 
     @Autowired

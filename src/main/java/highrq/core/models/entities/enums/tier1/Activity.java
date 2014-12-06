@@ -1,4 +1,4 @@
-package highrq.core.models.entities.enums;
+package highrq.core.models.entities.enums.tier1;
 
 public enum Activity {
 
