@@ -20,6 +20,9 @@ public class Phone {
     private String ext;
     private String type;
 
+    @ManyToOne
+    private Account account;
+
     public Phone(String areaCode, String prefix, String body, String ext, String type) {
         this.areaCode = areaCode;
         this.prefix = prefix;
@@ -86,6 +89,14 @@ public class Phone {
         this.type = type;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     public String getFormattedPhoneNumber() {
         StringBuilder sb = new StringBuilder(16);
         sb = (sb.append('(').append(getAreaCode()).append(") ").append(getPrefix()).append("-").append(getBody()));
@@ -94,6 +105,7 @@ public class Phone {
         }
         return sb.toString();
     }
+
 
     @Override
     public int hashCode() {

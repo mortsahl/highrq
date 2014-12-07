@@ -1,6 +1,9 @@
 package highrq.core.models.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +22,9 @@ public class Account {
     private String lname;
     private String password;
     private String role;
+
+    @OneToMany(mappedBy="account")
+    private List<Phone> phones = new ArrayList<Phone>();
 
     public Account() {}
     public Account(String username, String password, String role) {
@@ -74,6 +80,25 @@ public class Account {
     public void setLname(String lname) {
         this.lname = lname;
     }
+
+    public void addPhone(Phone phone) {
+        if (!getPhones().contains(phone)) {
+            getPhones().add(phone);
+            if (phone.getAccount() != null) {
+                phone.getAccount().getPhones().remove(phone);
+            }
+            phone.setAccount(this);
+        }
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
+    }
+
+    public Collection<Phone> getPhones() {
+        return phones;
+    }
+
 
     @Override
     public int hashCode() {

@@ -1,5 +1,6 @@
 package highrq.mvc;
 
+import highrq.api.mvc.AccountController;
 import highrq.core.models.entities.Account;
 import highrq.core.models.entities.Blog;
 import highrq.core.models.entities.enums.Role;
@@ -9,7 +10,6 @@ import highrq.core.services.exceptions.AccountExistsException;
 import highrq.core.services.exceptions.BlogExistsException;
 import highrq.core.services.util.AccountList;
 import highrq.core.services.util.BlogList;
-import highrq.api.mvc.AccountController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -272,4 +272,5 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.accounts[*].username", hasItems(endsWith("accountA"), endsWith("accountB"))))
                 .andExpect(status().isOk());
     }
+
 }

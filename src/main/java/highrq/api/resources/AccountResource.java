@@ -2,16 +2,21 @@ package highrq.api.resources;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.hateoas.ResourceSupport;
 import highrq.core.models.entities.Account;
+import highrq.core.models.entities.Phone;
+import org.springframework.hateoas.ResourceSupport;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountResource extends ResourceSupport {
+
     private String username;
     private String password;
     private String fname;
     private String lname;
     private String role;
+    private List<Phone> phones = new ArrayList<Phone>();
 
     public String getUsername() {
         return username;
@@ -55,6 +60,14 @@ public class AccountResource extends ResourceSupport {
         this.role = role;
     }
 
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
+    }
+
     public Account toAccount() {
         Account account = new Account();
         account.setUsername(username);
@@ -62,6 +75,7 @@ public class AccountResource extends ResourceSupport {
         account.setLname(lname);
         account.setPassword(password);
         account.setRole(role);
+        account.setPhones(phones);
         return account;
     }
 }
