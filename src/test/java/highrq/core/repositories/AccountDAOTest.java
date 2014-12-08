@@ -30,11 +30,11 @@ public class AccountDAOTest {
         Account account = new Account("name", "password", Role.USER.toString());
         dao.createAccount(account);
 
-        Account accnt = dao.findAccount(account.getId());
-        assertNotNull(accnt);
-        assertEquals(accnt.getUsername(), "name");
-        assertEquals(accnt.getPassword(), "password");
-        assertEquals(accnt.getRole(), Role.USER.toString());
+        Account foundAccounts = dao.findAccount(account.getId());
+        assertNotNull(foundAccounts);
+        assertEquals(foundAccounts.getUsername(), "name");
+        assertEquals(foundAccounts.getPassword(), "password");
+        assertEquals(foundAccounts.getRole(), Role.USER.toString());
     }
 
     @Test
@@ -46,14 +46,14 @@ public class AccountDAOTest {
         dao.createAccount(new Account("Paul", "password", Role.USER.toString()));
         dao.createAccount(new Account("John", "password", Role.ADMIN.toString()));
 
-        List<Account> accnt = dao.findAccountsByRole(Role.USER.toString());
-        assertEquals((long) accnt.size(), 2L);
+        List<Account> foundAccounts = dao.findAccountsByRole(Role.USER.toString());
+        assertEquals((long) foundAccounts.size(), 2L);
 
-        accnt = dao.findAccountsByRole(Role.ADMIN.toString());
-        assertEquals((long) accnt.size(), 1L);
+        foundAccounts = dao.findAccountsByRole(Role.ADMIN.toString());
+        assertEquals((long) foundAccounts.size(), 1L);
 
-        accnt = dao.findAccountsByRole(Role.GUEST.toString());
-        assertEquals((long) accnt.size(), (long) 0);  // Should this be an exception instead?
+        foundAccounts = dao.findAccountsByRole(Role.GUEST.toString());
+        assertEquals((long) foundAccounts.size(), (long) 0);  // Should this be an exception instead?
     }
 
     // TODO - sja: Need more tests
