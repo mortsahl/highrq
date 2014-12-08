@@ -10,7 +10,6 @@ import java.util.Objects;
 })
 
 public class Phone {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -19,6 +18,10 @@ public class Phone {
     private String body;
     private String ext;
     private String type;
+
+    @ManyToOne
+    @JoinColumn(name = "accountId" )
+    private Account account;
 
     public Phone(String areacode, String prefix, String body, String ext, String type) {
         this.areacode = areacode;
@@ -35,8 +38,7 @@ public class Phone {
         this.type = type;
     }
 
-    public Phone() {
-    }
+    public Phone() {}
 
     public Long getId() {
         return id;
@@ -86,6 +88,14 @@ public class Phone {
         this.type = type;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     public String getFormattedPhoneNumber() {
         StringBuilder sb = new StringBuilder(16);
         sb = (sb.append('(').append(getAreacode()).append(") ").append(getPrefix()).append("-").append(getBody()));
@@ -96,8 +106,13 @@ public class Phone {
     }
 
     @Override
+    public String toString() {
+        return "Phone [id: " + id + " AreaCode: " + areacode + " Prefix: " + prefix + " Body: " + body + " Ext: " + ext + " Type: " + type + "]";
+    }
+
+    @Override
     public int hashCode() {
-        return Objects.hash(id, areacode, prefix, body, ext, type);
+        return Objects.hash(id, areacode, prefix, body, ext, type, account);
     }
 
     @Override
@@ -109,6 +124,6 @@ public class Phone {
             return false;
         }
         final Phone other = (Phone) obj;
-        return Objects.equals(this.id, other.id) && Objects.equals(this.areacode, other.areacode) && Objects.equals(this.prefix, other.prefix) && Objects.equals(this.body, other.body) && Objects.equals(this.ext, other.ext) && Objects.equals(this.type, other.type);
+        return Objects.equals(this.id, other.id) && Objects.equals(this.areacode, other.areacode) && Objects.equals(this.prefix, other.prefix) && Objects.equals(this.body, other.body) && Objects.equals(this.ext, other.ext) && Objects.equals(this.type, other.type) && Objects.equals(this.account, other.account);
     }
 }
