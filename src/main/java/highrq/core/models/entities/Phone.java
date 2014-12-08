@@ -20,7 +20,8 @@ public class Phone {
     private String ext;
     private String type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", unique = true, nullable = false, updatable = false, insertable = false)
     private Account account;
 
     public Phone(String areaCode, String prefix, String body, String ext, String type) {

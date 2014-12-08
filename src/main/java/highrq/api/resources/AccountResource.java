@@ -6,7 +6,6 @@ import highrq.core.models.entities.Account;
 import highrq.core.models.entities.Phone;
 import org.springframework.hateoas.ResourceSupport;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountResource extends ResourceSupport {
@@ -16,7 +15,8 @@ public class AccountResource extends ResourceSupport {
     private String fname;
     private String lname;
     private String role;
-    private List<Phone> phones = new ArrayList<Phone>();
+
+    private List<Phone> phones;
 
     public String getUsername() {
         return username;

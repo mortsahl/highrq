@@ -1,10 +1,7 @@
 package highrq.core.models.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "account")
@@ -23,8 +20,8 @@ public class Account {
     private String password;
     private String role;
 
-    @OneToMany(mappedBy="account")
-    private List<Phone> phones = new ArrayList<Phone>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+    private List<Phone> phones;
 
     public Account() {}
     public Account(String username, String password, String role) {
