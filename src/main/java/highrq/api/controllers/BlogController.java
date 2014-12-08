@@ -42,7 +42,7 @@ public class BlogController {
     public ResponseEntity<BlogListResource> findAllBlogs() {
         BlogList blogList = blogService.findAllBlogs();
         BlogListResource blogListRes = new BlogListResourceAssembler().toResource(blogList);
-        return new ResponseEntity<BlogListResource>(blogListRes, HttpStatus.OK);
+        return new ResponseEntity<>(blogListRes, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{blogId}", method = RequestMethod.GET)
@@ -50,10 +50,10 @@ public class BlogController {
         Blog blog = blogService.findBlog(blogId);
         if (blog != null) {
             BlogResource res = new BlogResourceAssembler().toResource(blog);
-            return new ResponseEntity<BlogResource>(res, HttpStatus.OK);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         }
         else {
-            return new ResponseEntity<BlogResource>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -61,13 +61,13 @@ public class BlogController {
     public ResponseEntity<BlogEntryResource> createBlogEntry(
             @PathVariable Long blogId,
             @RequestBody BlogEntryResource sentBlogEntry) {
-        BlogEntry createdBlogEntry = null;
+        BlogEntry createdBlogEntry;
         try {
             createdBlogEntry = blogService.createBlogEntry(blogId, sentBlogEntry.toBlogEntry());
             BlogEntryResource createdResource = new BlogEntryResourceAssembler().toResource(createdBlogEntry);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(URI.create(createdResource.getLink("self").getHref()));
-            return new ResponseEntity<BlogEntryResource>(createdResource, headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(createdResource, headers, HttpStatus.CREATED);
         }
         catch (BlogNotFoundException e) {
             throw new NotFoundException(e);
@@ -79,7 +79,7 @@ public class BlogController {
         try {
             BlogEntryList list = blogService.findAllBlogEntries(blogId);
             BlogEntryListResource res = new BlogEntryListResourceAssembler().toResource(list);
-            return new ResponseEntity<BlogEntryListResource>(res, HttpStatus.OK);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         }
         catch (BlogNotFoundException exception) {
             throw new NotFoundException(exception);

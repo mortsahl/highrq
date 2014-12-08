@@ -30,9 +30,9 @@ public class BlogEntryController {
         if(entry != null)
         {
             BlogEntryResource res = new BlogEntryResourceAssembler().toResource(entry);
-            return new ResponseEntity<BlogEntryResource>(res, HttpStatus.OK);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         } else {
-            return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -44,9 +44,9 @@ public class BlogEntryController {
         if(entry != null)
         {
             BlogEntryResource res = new BlogEntryResourceAssembler().toResource(entry);
-            return new ResponseEntity<BlogEntryResource>(res, HttpStatus.OK);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         } else {
-            return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -58,9 +58,9 @@ public class BlogEntryController {
         if(updatedEntry != null)
         {
             BlogEntryResource res = new BlogEntryResourceAssembler().toResource(updatedEntry);
-            return new ResponseEntity<BlogEntryResource>(res, HttpStatus.OK);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         } else {
-            return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

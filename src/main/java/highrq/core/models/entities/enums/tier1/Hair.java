@@ -22,6 +22,6 @@ public enum Hair {
     public String getValue() {
         return value;
     }
-};
+}
 
 

@@ -26,7 +26,7 @@ public enum State {
 
     private String abbreviation;
 
-    private static final Map<String, State> STATES_BY_ABBR = new HashMap<String, State>();
+    private static final Map<String, State> STATES_BY_ABBR = new HashMap<>();
 
     static {
         for (State state : values()) {

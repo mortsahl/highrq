@@ -38,7 +38,7 @@ public class PhoneController {
             PhoneResource res = new PhoneResourceAssembler().toResource(createdPhone);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(URI.create(res.getLink("self").getHref()));
-            return new ResponseEntity<PhoneResource>(res, headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(res, headers, HttpStatus.CREATED);
         }
         catch (PhoneExistsException exception) {
             throw new ConflictException(exception);
@@ -51,9 +51,9 @@ public class PhoneController {
         Phone phone = service.findPhone(phoneId);
         if (phone != null) {
             PhoneResource res = new PhoneResourceAssembler().toResource(phone);
-            return new ResponseEntity<PhoneResource>(res, HttpStatus.OK);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         } else {
-            return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -63,9 +63,9 @@ public class PhoneController {
         Phone phone = service.deletePhone(phoneId);
         if (phone != null) {
             PhoneResource resource = new PhoneResourceAssembler().toResource(phone);
-            return new ResponseEntity<PhoneResource>(resource, HttpStatus.OK);
+            return new ResponseEntity<>(resource, HttpStatus.OK);
         } else {
-            return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -76,9 +76,9 @@ public class PhoneController {
 
         if (updatedEntry != null) {
             PhoneResource resource = new PhoneResourceAssembler().toResource(updatedEntry);
-            return new ResponseEntity<PhoneResource>(resource, HttpStatus.OK);
+            return new ResponseEntity<>(resource, HttpStatus.OK);
         } else {
-            return new ResponseEntity<PhoneResource>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

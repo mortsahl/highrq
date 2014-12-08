@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PhoneListResource extends ResourceSupport {
 
-    private List<PhoneResource> phones = new ArrayList<PhoneResource>();
+    private List<PhoneResource> phones = new ArrayList<>();
 
     public List<PhoneResource> getPhones() {
         return phones;

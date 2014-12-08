@@ -7,7 +7,7 @@ import java.util.List;
 
 public class BlogList {
 
-    private List<Blog> blogs = new ArrayList<Blog>();
+    private List<Blog> blogs = new ArrayList<>();
 
     public BlogList(List resultList) {
         this.blogs = resultList;

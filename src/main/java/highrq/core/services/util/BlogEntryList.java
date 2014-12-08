@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public class BlogEntryList {
-    private List<BlogEntry> entries = new ArrayList<BlogEntry>();
+    private List<BlogEntry> entries = new ArrayList<>();
     private Long blogId;
 
     public BlogEntryList(Long blogId, List<BlogEntry> entries) {

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class AccountResourceTest {
 
-    protected ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Test
     public void test() throws JsonProcessingException {

@@ -43,21 +43,21 @@ public class AccountController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<AccountListResource> findAllAccounts(@RequestParam(value = "username", required = false) String username) {
 
-        AccountList list = null;
+        AccountList accountList;
         if (username == null) {
-            list = accountService.findAllAccounts();
+            accountList = accountService.findAllAccounts();
         }
         else {
             Account account = accountService.findAccountByUsername(username);
             if (account == null) {
-                list = new AccountList(new ArrayList<Account>());
+                accountList = new AccountList(new ArrayList<>());
             }
             else {
-                list = new AccountList(Arrays.asList(account));
+                accountList = new AccountList(Arrays.asList(account));
             }
         }
-        AccountListResource res = new AccountListResourceAssembler().toResource(list);
-        return new ResponseEntity<AccountListResource>(res, HttpStatus.OK);
+        AccountListResource res = new AccountListResourceAssembler().toResource(accountList);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -67,7 +67,7 @@ public class AccountController {
             AccountResource res = new AccountResourceAssembler().toResource(createdAccount);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(URI.create(res.getLink("self").getHref()));
-            return new ResponseEntity<AccountResource>(res, headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(res, headers, HttpStatus.CREATED);
         }
         catch (AccountExistsException exception) {
             throw new ConflictException(exception);
@@ -79,10 +79,10 @@ public class AccountController {
         Account account = accountService.findAccount(accountId);
         if (account != null) {
             AccountResource res = new AccountResourceAssembler().toResource(account);
-            return new ResponseEntity<AccountResource>(res, HttpStatus.OK);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         }
         else {
-            return new ResponseEntity<AccountResource>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -93,7 +93,7 @@ public class AccountController {
             BlogResource createdBlogRes = new BlogResourceAssembler().toResource(createdBlog);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(URI.create(createdBlogRes.getLink("self").getHref()));
-            return new ResponseEntity<BlogResource>(createdBlogRes, headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(createdBlogRes, headers, HttpStatus.CREATED);
         }
         catch (AccountDoesNotExistException exception) {
             throw new NotFoundException(exception);
@@ -108,7 +108,7 @@ public class AccountController {
         try {
             BlogList blogList = accountService.findBlogsByAccount(accountId);
             BlogListResource blogListRes = new BlogListResourceAssembler().toResource(blogList);
-            return new ResponseEntity<BlogListResource>(blogListRes, HttpStatus.OK);
+            return new ResponseEntity<>(blogListRes, HttpStatus.OK);
         }
         catch (AccountDoesNotExistException exception) {
             throw new NotFoundException(exception);
@@ -120,7 +120,7 @@ public class AccountController {
         try {
             AccountList accountList = accountService.findAccountsByRole(role);
             AccountListResource accountListRes = new AccountListResourceAssembler().toResource(accountList);
-            return new ResponseEntity<AccountListResource>(accountListRes, HttpStatus.OK);
+            return new ResponseEntity<>(accountListRes, HttpStatus.OK);
         }
         catch (AccountDoesNotExistException exception) {
             throw new NotFoundException(exception);

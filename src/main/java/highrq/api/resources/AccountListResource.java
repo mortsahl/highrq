@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AccountListResource extends ResourceSupport {
 
-    private List<AccountResource> accounts = new ArrayList<AccountResource>();
+    private List<AccountResource> accounts = new ArrayList<>();
 
     public List<AccountResource> getAccounts() {
         return accounts;

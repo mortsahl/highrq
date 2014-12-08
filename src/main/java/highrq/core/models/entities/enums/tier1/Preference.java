@@ -14,6 +14,6 @@ public enum Preference {
     public String getValue() {
         return value;
     }
-};
+}
 
 

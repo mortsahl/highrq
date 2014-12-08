@@ -46,7 +46,7 @@ public class BlogControllerTest {
 
     @Test
     public void findAllBlogs() throws Exception {
-        List<Blog> list = new ArrayList<Blog>();
+        List<Blog> list = new ArrayList<>();
 
         Blog blogA = new Blog();
         blogA.setId(1L);

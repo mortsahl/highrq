@@ -7,17 +7,17 @@ import java.util.List;
 
 public class PhoneList {
 
-    private List<Phone> phones = new ArrayList<Phone>();
+    private List<Phone> phones = new ArrayList<>();
 
-    public PhoneList(List<Phone> list) {
-        this.phones = list;
+    public PhoneList(List<Phone> phones) {
+        this.phones = phones;
     }
 
     public List<Phone> getPhones() {
         return phones;
     }
 
-    public void setPhones(List<Phone> accounts) {
+    public void setPhones(List<Phone> phones) {
         this.phones = phones;
     }
 }

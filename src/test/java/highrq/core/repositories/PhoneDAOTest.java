@@ -93,7 +93,7 @@ public class PhoneDAOTest {
         Phone phone = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT, TYPE));
         assertEquals(phone.getAreacode(), AREACODE);
 
-        phone.setAreacode(AC);;
+        phone.setAreacode(AC);
 
         //update it
         phone = dao.updatePhone(phone);

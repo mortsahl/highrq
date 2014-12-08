@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AccountList {
 
-    private List<Account> accounts = new ArrayList<Account>();
+    private List<Account> accounts = new ArrayList<>();
 
     public AccountList(List<Account> list) {
         this.accounts = list;

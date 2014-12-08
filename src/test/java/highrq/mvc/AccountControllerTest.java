@@ -52,7 +52,7 @@ public class AccountControllerTest {
 
     @Test
     public void findAllBlogsForAccount() throws Exception {
-        List<Blog> list = new ArrayList<Blog>();
+        List<Blog> list = new ArrayList<>();
 
         Blog blogA = new Blog();
         blogA.setId(1L);
@@ -76,7 +76,7 @@ public class AccountControllerTest {
 
     @Test
     public void findAllBlogsForNonExistingAccount() throws Exception {
-        List<Blog> list = new ArrayList<Blog>();
+        List<Blog> list = new ArrayList<>();
 
         Blog blogA = new Blog();
         blogA.setId(1L);
@@ -88,7 +88,7 @@ public class AccountControllerTest {
         blogB.setTitle("Title B");
         list.add(blogB);
 
-        BlogList blogList = new BlogList(list);
+      //  BlogList blogList = new BlogList(list);
 
         when(service.findBlogsByAccount(1L)).thenThrow(new AccountDoesNotExistException());
 
@@ -199,7 +199,7 @@ public class AccountControllerTest {
 
     @Test
     public void findAllAccounts() throws Exception {
-        List<Account> accounts = new ArrayList<Account>();
+        List<Account> accounts = new ArrayList<>();
 
         Account accountA = new Account();
         accountA.setId(1L);
@@ -224,7 +224,7 @@ public class AccountControllerTest {
 
     @Test
     public void findAccountByUsername() throws Exception {
-        List<Account> accounts = new ArrayList<Account>();
+        List<Account> accounts = new ArrayList<>();
 
         Account accountA = new Account();
         accountA.setId(1L);
@@ -249,7 +249,7 @@ public class AccountControllerTest {
 
     @Test
     public void findAccountsByRole() throws Exception {
-        List<Account> accounts = new ArrayList<Account>();
+        List<Account> accounts = new ArrayList<>();
 
         Account accountA = new Account();
         accountA.setId(1L);
