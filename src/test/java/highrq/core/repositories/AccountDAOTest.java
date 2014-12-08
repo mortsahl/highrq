@@ -47,13 +47,13 @@ public class AccountDAOTest {
         dao.createAccount(new Account("John", "password", Role.ADMIN.toString()));
 
         List<Account> accnt = dao.findAccountsByRole(Role.USER.toString());
-        assertEquals(accnt.size(), 2);
+        assertEquals((long) accnt.size(), 2L);
 
         accnt = dao.findAccountsByRole(Role.ADMIN.toString());
-        assertEquals(accnt.size(), 1);
+        assertEquals((long) accnt.size(), 1L);
 
         accnt = dao.findAccountsByRole(Role.GUEST.toString());
-        assertEquals(accnt.size(), 0);  // Should this be an exception instead?
+        assertEquals((long) accnt.size(), (long) 0);  // Should this be an exception instead?
     }
 
     // TODO - sja: Need more tests

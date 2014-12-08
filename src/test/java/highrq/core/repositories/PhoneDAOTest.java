@@ -62,6 +62,7 @@ public class PhoneDAOTest {
         assertNotNull(phone2);
         assertNotNull(phone3);
 
+        //noinspection ImplicitNumericConversion,ImplicitNumericConversion
         assertEquals(phones.size(), 2);
         Phone ph = phones.get(0);
         assertEquals(ph.getAreacode(), AREACODE);
