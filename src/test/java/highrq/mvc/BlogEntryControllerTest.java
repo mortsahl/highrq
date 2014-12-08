@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import highrq.core.models.entities.Blog;
 import highrq.core.models.entities.BlogEntry;
 import highrq.core.services.BlogEntryService;
-import highrq.api.mvc.BlogEntryController;
+import highrq.api.controllers.BlogEntryController;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Matchers.any;

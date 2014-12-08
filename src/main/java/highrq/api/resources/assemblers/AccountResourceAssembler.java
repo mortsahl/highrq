@@ -1,13 +1,10 @@
 package highrq.api.resources.assemblers;
 
-import highrq.api.mvc.AccountController;
+import highrq.api.controllers.AccountController;
 import highrq.api.resources.AccountResource;
 import highrq.core.models.entities.Account;
-import highrq.core.models.entities.Phone;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -26,7 +23,6 @@ public class AccountResourceAssembler extends ResourceAssemblerSupport<Account, 
         resource.setLname(account.getLname());
         resource.setPassword(account.getPassword());
         resource.setRole((account.getRole()));
-        resource.setPhones((List<Phone>) account.getPhones());
         resource.add(linkTo(methodOn(AccountController.class).getAccount(account.getId())).withSelfRel());
         resource.add(linkTo(methodOn(AccountController.class).findAllBlogs(account.getId())).withRel("blogs"));
         return resource;

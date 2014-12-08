@@ -6,7 +6,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "phone")
 @NamedQueries({
-        @NamedQuery(name = "Phone.findPhonesByAreaCode", query = "Select p from Phone p where p.areaCode=:areaCode")
+        @NamedQuery(name = "Phone.findPhonesByAreacode", query = "Select p from Phone p where p.areacode=:areacode")
 })
 
 public class Phone {
@@ -14,26 +14,22 @@ public class Phone {
     @Id
     @GeneratedValue
     private Long id;
-    private String areaCode;
+    private String areacode;
     private String prefix;
     private String body;
     private String ext;
     private String type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", unique = true, nullable = false, updatable = false, insertable = false)
-    private Account account;
-
-    public Phone(String areaCode, String prefix, String body, String ext, String type) {
-        this.areaCode = areaCode;
+    public Phone(String areacode, String prefix, String body, String ext, String type) {
+        this.areacode = areacode;
         this.prefix = prefix;
         this.body = body;
         this.ext = ext;
         this.type = type;
     }
 
-    public Phone(String areaCode, String prefix, String body, String type) {
-        this.areaCode = areaCode;
+    public Phone(String areacode, String prefix, String body, String type) {
+        this.areacode = areacode;
         this.prefix = prefix;
         this.body = body;
         this.type = type;
@@ -50,12 +46,12 @@ public class Phone {
         this.id = id;
     }
 
-    public String getAreaCode() {
-        return areaCode;
+    public String getAreacode() {
+        return areacode;
     }
 
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode;
+    public void setAreacode(String areacode) {
+        this.areacode = areacode;
     }
 
     public String getPrefix() {
@@ -90,27 +86,18 @@ public class Phone {
         this.type = type;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
     public String getFormattedPhoneNumber() {
         StringBuilder sb = new StringBuilder(16);
-        sb = (sb.append('(').append(getAreaCode()).append(") ").append(getPrefix()).append("-").append(getBody()));
+        sb = (sb.append('(').append(getAreacode()).append(") ").append(getPrefix()).append("-").append(getBody()));
         if (org.apache.commons.lang3.StringUtils.isNotBlank(getExt())) {
             sb.append(" x").append(getExt());
         }
         return sb.toString();
     }
 
-
     @Override
     public int hashCode() {
-        return Objects.hash(id, areaCode, prefix, body, ext, type);
+        return Objects.hash(id, areacode, prefix, body, ext, type);
     }
 
     @Override
@@ -122,6 +109,6 @@ public class Phone {
             return false;
         }
         final Phone other = (Phone) obj;
-        return Objects.equals(this.id, other.id) && Objects.equals(this.areaCode, other.areaCode) && Objects.equals(this.prefix, other.prefix) && Objects.equals(this.body, other.body) && Objects.equals(this.ext, other.ext) && Objects.equals(this.type, other.type);
+        return Objects.equals(this.id, other.id) && Objects.equals(this.areacode, other.areacode) && Objects.equals(this.prefix, other.prefix) && Objects.equals(this.body, other.body) && Objects.equals(this.ext, other.ext) && Objects.equals(this.type, other.type);
     }
 }

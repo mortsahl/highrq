@@ -1,7 +1,7 @@
 package highrq.api.resources.assemblers;
 
 import highrq.core.services.util.PhoneList;
-import highrq.api.mvc.PhoneController;
+import highrq.api.controllers.PhoneController;
 import highrq.api.resources.PhoneListResource;
 import highrq.api.resources.PhoneResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;

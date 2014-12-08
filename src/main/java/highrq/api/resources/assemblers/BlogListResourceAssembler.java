@@ -3,7 +3,7 @@ package highrq.api.resources.assemblers;
 import highrq.api.resources.BlogListResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import highrq.core.services.util.BlogList;
-import highrq.api.mvc.BlogController;
+import highrq.api.controllers.BlogController;
 import org.springframework.stereotype.Component;
 
 @Component

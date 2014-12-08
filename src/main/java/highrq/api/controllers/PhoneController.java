@@ -1,4 +1,4 @@
-package highrq.api.mvc;
+package highrq.api.controllers;
 
 import highrq.core.models.entities.Phone;
 import highrq.core.services.PhoneService;
@@ -26,6 +26,7 @@ public class PhoneController {
 
     @Autowired
     public PhoneController(PhoneService phoneService) {
+
         this.service = phoneService;
     }
 
@@ -83,7 +84,7 @@ public class PhoneController {
 
     // TODO - sja: Need findPhonesByAccount
 
-    // TODO - sja: Need findPhonesByAreaCode
+    // TODO - sja: Need findPhonesByAreacode
 
 }
 

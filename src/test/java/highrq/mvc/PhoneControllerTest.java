@@ -5,7 +5,7 @@ import highrq.core.models.entities.enums.PhoneType;
 import highrq.core.services.AccountService;
 import highrq.core.services.PhoneService;
 import highrq.core.services.exceptions.PhoneExistsException;
-import highrq.api.mvc.PhoneController;
+import highrq.api.controllers.PhoneController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -55,7 +55,7 @@ public class PhoneControllerTest {
     public void createPhoneNonExisting() throws Exception {
         Phone createdPhone = new Phone();
         createdPhone.setId(1L);
-        createdPhone.setAreaCode(AREACODE);
+        createdPhone.setAreacode(AREACODE);
         createdPhone.setPrefix(PREFIX);
         createdPhone.setBody(BODY);
         createdPhone.setExt(EXT);
@@ -64,10 +64,10 @@ public class PhoneControllerTest {
         when(service.createPhone(any(Phone.class))).thenReturn(createdPhone);
 
         mockMvc.perform(post("/api/phones")
-                .content("{\"areaCode\": \"303\",\"prefix\":\"987\", \"body\": \"5678\", \"ext\": \"12345\", \"type\" : \"Cell\", \"type\": \"Cell\"}")  // TODO - sja: Need accountId in test
+                .content("{\"areacode\": \"303\",\"prefix\":\"987\", \"body\": \"5678\", \"ext\": \"12345\", \"type\" : \"Cell\", \"type\": \"Cell\"}")  // TODO - sja: Need accountId in test
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(header().string("Location", org.hamcrest.Matchers.endsWith("/api/phones/1")))
-                .andExpect(jsonPath("$.areaCode", is(createdPhone.getAreaCode())))
+                .andExpect(jsonPath("$.areacode", is(createdPhone.getAreacode())))
                 .andExpect(jsonPath("$.type", is(createdPhone.getType())))
  //               .andExpect(jsonPath("$.accountId", is(createdPhone.getAccountId())))
                 .andExpect(status().isCreated());
@@ -82,13 +82,13 @@ public class PhoneControllerTest {
     public void createPhoneExisting() throws Exception {
         Phone createdPhone = new Phone();
         createdPhone.setId(1L);
-        createdPhone.setAreaCode(AREACODE);
+        createdPhone.setAreacode(AREACODE);
         createdPhone.setBody(BODY);
 
         when(service.createPhone(any(Phone.class))).thenThrow(new PhoneExistsException());
 
         mockMvc.perform(post("/api/phones")
-                .content("{\"areaCode\":\"303\",\"body\":\"5678\"}")
+                .content("{\"areacode\":\"303\",\"body\":\"5678\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isConflict());
     }
@@ -97,7 +97,7 @@ public class PhoneControllerTest {
     public void getExistingPhone() throws Exception {
         Phone foundPhone = new Phone();
         foundPhone.setId(1L);
-        foundPhone.setAreaCode(AREACODE);
+        foundPhone.setAreacode(AREACODE);
         foundPhone.setBody(BODY);
         foundPhone.setPrefix(PREFIX);
         foundPhone.setExt(EXT);
@@ -107,7 +107,7 @@ public class PhoneControllerTest {
 
         mockMvc.perform(get("/api/phones/1"))
 //      .andDo(print())
-                .andExpect(jsonPath("$.areaCode", is(foundPhone.getAreaCode())))
+                .andExpect(jsonPath("$.areacode", is(foundPhone.getAreacode())))
                 .andExpect(jsonPath("$.prefix", is(foundPhone.getPrefix())))
                 .andExpect(jsonPath("$.body", is(foundPhone.getBody())))
                 .andExpect(jsonPath("$.ext", is(foundPhone.getExt())))
@@ -128,13 +128,13 @@ public class PhoneControllerTest {
     public void deleteExistingPhone() throws Exception {
         Phone deletedPhone = new Phone();
         deletedPhone.setId(1L);
-        deletedPhone.setAreaCode(AREACODE);
+        deletedPhone.setAreacode(AREACODE);
         deletedPhone.setExt(EXT);
 
         when(service.deletePhone(1L)).thenReturn(deletedPhone);
 
         mockMvc.perform(delete("/api/phones/1"))
-                .andExpect(jsonPath("$.areaCode", is(deletedPhone.getAreaCode())))
+                .andExpect(jsonPath("$.areacode", is(deletedPhone.getAreacode())))
                 .andExpect(jsonPath("$.ext", is(deletedPhone.getExt())))
                 .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/phones/1"))))
                 .andExpect(status().isOk());

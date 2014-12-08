@@ -75,7 +75,6 @@ public class AccountResource extends ResourceSupport {
         account.setLname(lname);
         account.setPassword(password);
         account.setRole(role);
-        account.setPhones(phones);
         return account;
     }
 }

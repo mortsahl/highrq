@@ -1,4 +1,4 @@
-package highrq.api.mvc;
+package highrq.api.controllers;
 
 import highrq.core.models.entities.Account;
 import highrq.core.models.entities.Blog;

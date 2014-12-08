@@ -42,7 +42,7 @@ public class PhoneDAOTest {
 
         Phone phone2 = dao.findPhone(phone.getId());
         assertNotNull(phone2);
-        assertEquals(phone2.getAreaCode(), AREACODE);
+        assertEquals(phone2.getAreacode(), AREACODE);
         assertEquals(phone2.getPrefix(), PREFIX);
         assertEquals(phone2.getBody(), BODY);
         assertEquals(phone2.getExt(), EXT);
@@ -51,20 +51,20 @@ public class PhoneDAOTest {
 
     @Test
     @Transactional
-    public void testFindPhonesByAreaCode() {
+    public void testFindPhonesByAreacode() {
 
         Phone phone1 = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT, TYPE));
         Phone phone2 = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT, TYPE));
         Phone phone3 = dao.createPhone(new Phone(AREACODE2, PREFIX2, BODY2, EXT2, TYPE));
 
-        List<Phone> phones = dao.findPhonesByAreaCode(AREACODE);
+        List<Phone> phones = dao.findPhonesByAreacode(AREACODE);
         assertNotNull(phone1);
         assertNotNull(phone2);
         assertNotNull(phone3);
 
         assertEquals(phones.size(), 2);
         Phone ph = phones.get(0);
-        assertEquals(ph.getAreaCode(), AREACODE);
+        assertEquals(ph.getAreacode(), AREACODE);
     }
 
     @Test
@@ -91,15 +91,15 @@ public class PhoneDAOTest {
 
         // Create a phone to update
         Phone phone = dao.createPhone(new Phone(AREACODE, PREFIX, BODY, EXT, TYPE));
-        assertEquals(phone.getAreaCode(), AREACODE);
+        assertEquals(phone.getAreacode(), AREACODE);
 
-        phone.setAreaCode(AC);;
+        phone.setAreacode(AC);;
 
         //update it
         phone = dao.updatePhone(phone);
 
         // now check that is was updated
-        assertEquals(phone.getAreaCode(), AC);
+        assertEquals(phone.getAreacode(), AC);
 
     }
 }

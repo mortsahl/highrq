@@ -37,7 +37,7 @@ public class JpaPhoneDAO implements PhoneDAO {
     @Override
     public Phone updatePhone(Phone data) {
         Phone phone = em.find(Phone.class, data.getId());
-        phone.setAreaCode(data.getAreaCode());
+        phone.setAreacode(data.getAreacode());
         phone.setPrefix(data.getPrefix());
         phone.setBody(data.getBody());
         phone.setExt(data.getExt());
@@ -45,9 +45,9 @@ public class JpaPhoneDAO implements PhoneDAO {
     }
 
     @Override
-    public List<Phone> findPhonesByAreaCode(String areaCode) {
-        Query query = em.createNamedQuery("Phone.findPhonesByAreaCode");
-        query.setParameter("areaCode", areaCode);
+    public List<Phone> findPhonesByAreacode(String areacode) {
+        Query query = em.createNamedQuery("Phone.findPhonesByAreacode");
+        query.setParameter("areacode", areacode);
         List<Phone> phones = query.getResultList();
         if(phones.size() == 0) {
             return Collections.EMPTY_LIST;

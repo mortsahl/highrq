@@ -7,7 +7,7 @@ import highrq.core.services.BlogService;
 import highrq.core.services.exceptions.BlogNotFoundException;
 import highrq.core.services.util.BlogEntryList;
 import highrq.core.services.util.BlogList;
-import highrq.api.mvc.BlogController;
+import highrq.api.controllers.BlogController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

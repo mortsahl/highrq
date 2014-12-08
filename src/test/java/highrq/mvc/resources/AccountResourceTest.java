@@ -17,12 +17,12 @@ public class AccountResourceTest {
     @Test
     public void test() throws JsonProcessingException {
         Phone phone1 = new Phone();
-        phone1.setAreaCode("303");
+        phone1.setAreacode("303");
         phone1.setPrefix("555");
         phone1.setBody("6666");
         phone1.setExt("12345");
         Phone phone2 = new Phone();
-        phone2.setAreaCode("304");
+        phone2.setAreacode("304");
         phone2.setPrefix("556");
         phone2.setBody("6667");
         phone2.setExt("12346");

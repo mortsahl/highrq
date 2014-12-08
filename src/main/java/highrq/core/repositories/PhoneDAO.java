@@ -9,5 +9,5 @@ public interface PhoneDAO {
   public Phone createPhone(Phone data);
   public Phone deletePhone(Long id);
   public Phone updatePhone(Phone data);
-  public List<Phone> findPhonesByAreaCode(String AreaCode);
+  public List<Phone> findPhonesByAreacode(String Areacode);
 }

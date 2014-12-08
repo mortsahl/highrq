@@ -1,6 +1,6 @@
 package highrq.mvc;
 
-import highrq.api.mvc.AccountController;
+import highrq.api.controllers.AccountController;
 import highrq.core.models.entities.Account;
 import highrq.core.models.entities.Blog;
 import highrq.core.models.entities.enums.Role;

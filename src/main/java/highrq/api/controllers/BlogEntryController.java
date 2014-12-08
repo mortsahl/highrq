@@ -1,4 +1,4 @@
-package highrq.api.mvc;
+package highrq.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +13,7 @@ import highrq.api.resources.assemblers.BlogEntryResourceAssembler;
 @Controller
 @RequestMapping("/api/blog-entries")
 public class BlogEntryController {
+
     private BlogEntryService service;
 
     @Autowired

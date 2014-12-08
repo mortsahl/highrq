@@ -5,18 +5,18 @@ import org.springframework.hateoas.ResourceSupport;
 
 public class PhoneResource extends ResourceSupport {
 
-  private String areaCode;
+  private String areacode;
   private String prefix;
   private String body;
   private String ext;
   private String type;
 
-  public String getAreaCode() {
-    return areaCode;
+  public String getAreacode() {
+    return areacode;
   }
 
-  public void setAreaCode(String areaCode) {
-    this.areaCode = areaCode;
+  public void setAreacode(String areacode) {
+    this.areacode = areacode;
   }
 
   public String getPrefix() {
@@ -53,7 +53,7 @@ public class PhoneResource extends ResourceSupport {
 
   public Phone toPhone() {
     Phone phone = new Phone();
-    phone.setAreaCode(areaCode);
+    phone.setAreacode(areacode);
     phone.setPrefix(prefix);
     phone.setBody(body);
     phone.setExt(ext);

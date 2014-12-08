@@ -1,6 +1,6 @@
 package highrq.api.resources.assemblers;
 
-import highrq.api.mvc.PhoneController;
+import highrq.api.controllers.PhoneController;
 import highrq.api.resources.PhoneResource;
 import highrq.core.models.entities.Phone;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
@@ -19,7 +19,7 @@ public class PhoneResourceAssembler extends ResourceAssemblerSupport<Phone, Phon
     @Override
     public PhoneResource toResource(Phone phone) {
         PhoneResource phoneResource = new PhoneResource();
-        phoneResource.setAreaCode(phone.getAreaCode());
+        phoneResource.setAreacode(phone.getAreacode());
         phoneResource.setPrefix(phone.getPrefix());
         phoneResource.setBody(phone.getBody());
         phoneResource.setExt(phone.getExt());

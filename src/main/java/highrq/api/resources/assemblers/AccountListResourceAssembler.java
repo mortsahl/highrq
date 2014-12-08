@@ -1,7 +1,7 @@
 package highrq.api.resources.assemblers;
 
 import highrq.core.services.util.AccountList;
-import highrq.api.mvc.AccountController;
+import highrq.api.controllers.AccountController;
 import highrq.api.resources.AccountListResource;
 import highrq.api.resources.AccountResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
