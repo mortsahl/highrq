@@ -23,8 +23,12 @@ public class AccountResourceAssembler extends ResourceAssemblerSupport<Account, 
         resource.setLname(account.getLname());
         resource.setPassword(account.getPassword());
         resource.setRole((account.getRole()));
+        resource.setPhones(account.getPhones());
         resource.add(linkTo(methodOn(AccountController.class).getAccount(account.getId())).withSelfRel());
         resource.add(linkTo(methodOn(AccountController.class).findAllBlogs(account.getId())).withRel("blogs"));
+
+        // TODO - sja: add phones here?
+
         return resource;
     }
 }

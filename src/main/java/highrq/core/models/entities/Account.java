@@ -20,11 +20,23 @@ public class Account {
     private String password;
     private String role;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+    private List<Phone> phones = new ArrayList<>();
+
+
     public Account() {}
     public Account(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
     }
 
     public Long getId() {

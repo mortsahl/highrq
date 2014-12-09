@@ -35,6 +35,9 @@ public class AccountServiceImpl implements AccountService {
         if (account != null) {
             throw new AccountExistsException();
         }
+
+        // TODO - sja: save phones here?
+
         return accountDAO.createAccount(data);
     }
 
