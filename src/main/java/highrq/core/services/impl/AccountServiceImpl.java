@@ -2,8 +2,10 @@ package highrq.core.services.impl;
 
 import highrq.core.models.entities.Account;
 import highrq.core.models.entities.Blog;
+import highrq.core.models.entities.Phone;
 import highrq.core.repositories.AccountDAO;
 import highrq.core.repositories.BlogDAO;
+import highrq.core.repositories.PhoneDAO;
 import highrq.core.services.AccountService;
 import highrq.core.services.exceptions.AccountDoesNotExistException;
 import highrq.core.services.exceptions.AccountExistsException;
@@ -14,12 +16,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Transactional
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountDAO accountDAO;
+
+    @Autowired
+    private PhoneDAO phoneDao;
 
     @Autowired
     private BlogDAO blogDAO;
@@ -35,11 +43,15 @@ public class AccountServiceImpl implements AccountService {
         if (account != null) {
             throw new AccountExistsException();
         }
-
-        // TODO - sja: save phones here?
+        List<Phone> phones = new ArrayList<>();
+        for (Phone phone : data.getPhones()) {
+            phones.add(phone);
+        }
+        data.setPhones(phones);
 
         return accountDAO.createAccount(data);
     }
+
 
     @Override
     public Blog createBlog(Long accountId, Blog data) {

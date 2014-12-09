@@ -20,9 +20,9 @@ public class Account {
     private String password;
     private String role;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name="accountId")
     private List<Phone> phones = new ArrayList<>();
-
 
     public Account() {}
     public Account(String username, String password, String role) {

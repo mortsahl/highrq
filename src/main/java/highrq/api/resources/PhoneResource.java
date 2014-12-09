@@ -1,6 +1,5 @@
 package highrq.api.resources;
 
-import highrq.core.models.entities.Account;
 import highrq.core.models.entities.Phone;
 import org.springframework.hateoas.ResourceSupport;
 
@@ -11,7 +10,6 @@ public class PhoneResource extends ResourceSupport {
   private String body;
   private String ext;
   private String type;
-  private Account account;
 
   public String getAreacode() {
     return areacode;
@@ -53,14 +51,6 @@ public class PhoneResource extends ResourceSupport {
     this.type = type;
   }
 
-  public Account getAccount() {
-    return account;
-  }
-
-  public void setAccount(Account account) {
-    this.account = account;
-  }
-
   public Phone toPhone() {
     Phone phone = new Phone();
     phone.setAreacode(areacode);
@@ -68,8 +58,6 @@ public class PhoneResource extends ResourceSupport {
     phone.setBody(body);
     phone.setExt(ext);
     phone.setType(type);
-    phone.setAccount(account);
-
     return phone;
   }
 }
