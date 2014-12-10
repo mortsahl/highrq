@@ -1,24 +1,20 @@
 package highrq.api.controllers;
 
-import highrq.core.models.entities.Phone;
-import highrq.core.services.PhoneService;
-import highrq.core.services.exceptions.PhoneExistsException;
 import highrq.api.exceptions.ConflictException;
 import highrq.api.resources.PhoneResource;
 import highrq.api.resources.assemblers.PhoneResourceAssembler;
+import highrq.core.models.entities.Phone;
+import highrq.core.services.PhoneService;
+import highrq.core.services.exceptions.PhoneExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
-@Controller
+@RestController
 @RequestMapping("/api/phones")
 public class PhoneController {
 

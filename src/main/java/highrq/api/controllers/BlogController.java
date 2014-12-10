@@ -1,33 +1,29 @@
 package highrq.api.controllers;
 
+import highrq.api.exceptions.NotFoundException;
+import highrq.api.resources.BlogEntryListResource;
+import highrq.api.resources.BlogEntryResource;
+import highrq.api.resources.BlogListResource;
+import highrq.api.resources.BlogResource;
+import highrq.api.resources.assemblers.BlogEntryListResourceAssembler;
+import highrq.api.resources.assemblers.BlogEntryResourceAssembler;
+import highrq.api.resources.assemblers.BlogListResourceAssembler;
+import highrq.api.resources.assemblers.BlogResourceAssembler;
 import highrq.core.models.entities.Blog;
 import highrq.core.models.entities.BlogEntry;
 import highrq.core.services.BlogService;
 import highrq.core.services.exceptions.BlogNotFoundException;
 import highrq.core.services.util.BlogEntryList;
-import highrq.api.exceptions.NotFoundException;
-import highrq.api.resources.BlogEntryResource;
-import highrq.api.resources.BlogListResource;
-import highrq.api.resources.BlogResource;
-import highrq.api.resources.assemblers.BlogEntryResourceAssembler;
-import highrq.api.resources.assemblers.BlogListResourceAssembler;
-import highrq.api.resources.assemblers.BlogResourceAssembler;
+import highrq.core.services.util.BlogList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import highrq.core.services.util.BlogList;
-import highrq.api.resources.BlogEntryListResource;
-import highrq.api.resources.assemblers.BlogEntryListResourceAssembler;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
-@Controller
+@RestController
 @RequestMapping("/api/blogs")
 public class BlogController {
 

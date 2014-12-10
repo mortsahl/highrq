@@ -1,13 +1,5 @@
 package highrq.api.controllers;
 
-import highrq.core.models.entities.Account;
-import highrq.core.models.entities.Blog;
-import highrq.core.services.AccountService;
-import highrq.core.services.exceptions.AccountDoesNotExistException;
-import highrq.core.services.exceptions.AccountExistsException;
-import highrq.core.services.exceptions.BlogExistsException;
-import highrq.core.services.util.AccountList;
-import highrq.core.services.util.BlogList;
 import highrq.api.exceptions.ConflictException;
 import highrq.api.exceptions.NotFoundException;
 import highrq.api.resources.AccountListResource;
@@ -18,18 +10,25 @@ import highrq.api.resources.assemblers.AccountListResourceAssembler;
 import highrq.api.resources.assemblers.AccountResourceAssembler;
 import highrq.api.resources.assemblers.BlogListResourceAssembler;
 import highrq.api.resources.assemblers.BlogResourceAssembler;
+import highrq.core.models.entities.Account;
+import highrq.core.models.entities.Blog;
+import highrq.core.services.AccountService;
+import highrq.core.services.exceptions.AccountDoesNotExistException;
+import highrq.core.services.exceptions.AccountExistsException;
+import highrq.core.services.exceptions.BlogExistsException;
+import highrq.core.services.util.AccountList;
+import highrq.core.services.util.BlogList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@Controller
+@RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
 
