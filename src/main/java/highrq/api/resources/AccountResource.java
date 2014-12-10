@@ -3,6 +3,7 @@ package highrq.api.resources;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import highrq.core.models.entities.Account;
+import highrq.core.models.entities.Address;
 import highrq.core.models.entities.Phone;
 import org.springframework.hateoas.ResourceSupport;
 
@@ -15,8 +16,8 @@ public class AccountResource extends ResourceSupport {
     private String fname;
     private String lname;
     private String role;
-
     private List<Phone> phones;
+    private Address address;
 
     public String getUsername() {
         return username;
@@ -68,6 +69,15 @@ public class AccountResource extends ResourceSupport {
         this.phones = phones;
     }
 
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public Account toAccount() {
         Account account = new Account();
         account.setUsername(username);
@@ -76,6 +86,7 @@ public class AccountResource extends ResourceSupport {
         account.setPassword(password);
         account.setRole(role);
         account.setPhones(phones);
+        account.setAddress(address);
         return account;
     }
 }

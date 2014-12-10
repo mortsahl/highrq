@@ -24,6 +24,7 @@ public class AccountResourceAssembler extends ResourceAssemblerSupport<Account, 
         resource.setPassword(account.getPassword());
         resource.setRole((account.getRole()));
         resource.setPhones(account.getPhones());
+        resource.setAddress(account.getAddress());
         resource.add(linkTo(methodOn(AccountController.class).getAccount(account.getId())).withSelfRel());
         resource.add(linkTo(methodOn(AccountController.class).findAllBlogs(account.getId())).withRel("blogs"));
 

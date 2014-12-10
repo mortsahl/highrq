@@ -24,6 +24,11 @@ public class Account {
     @JoinColumn(name="accountId")
     private List<Phone> phones = new ArrayList<>();
 
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name="addressId")
+    private Address address;
+
+
     public Account() {}
     public Account(String username, String password, String role) {
         this.username = username;
@@ -37,6 +42,14 @@ public class Account {
 
     public void setPhones(List<Phone> phones) {
         this.phones = phones;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Long getId() {

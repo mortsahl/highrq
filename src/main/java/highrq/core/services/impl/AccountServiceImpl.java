@@ -1,6 +1,7 @@
 package highrq.core.services.impl;
 
 import highrq.core.models.entities.Account;
+import highrq.core.models.entities.Address;
 import highrq.core.models.entities.Blog;
 import highrq.core.models.entities.Phone;
 import highrq.core.repositories.AccountDAO;
@@ -52,7 +53,6 @@ public class AccountServiceImpl implements AccountService {
         return accountDAO.createAccount(data);
     }
 
-
     @Override
     public Blog createBlog(Long accountId, Blog data) {
         Blog blogSameTitle = blogDAO.findBlogByTitle(data.getTitle());
@@ -95,5 +95,28 @@ public class AccountServiceImpl implements AccountService {
         return new AccountList(accountDAO.findAccountsByRole(role));
     }
 
+    // TODO - sja: Implement me
+    @Override
+    public Account updateAccountPhone(Phone phone) {
+        return null;
+    }
+
+    // TODO - sja: Implement me
+    @Override
+    public Account updateAccountAddress(Address address) {
+        return null;
+    }
+
+    // TODO - sja: Implement me
+    @Override
+    public Account addAccountPhone(Phone phone) {
+        return null;
+    }
+
+    // TODO - sja: Implement me
+    @Override
+    public Account deleteAccountPhone(Long phoneId) {
+        return null;
+    }
 }
 
