@@ -1,5 +1,7 @@
 package highrq.core.models.entities;
 
+import highrq.core.models.entities.enums.Gender;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ public class Characteristics {
     private int height_feet;
     private int height_inch;
     private int weight;
+    private String gender;
 
     public Long getId() {
         return id;
@@ -56,9 +59,17 @@ public class Characteristics {
         this.age = age;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender.getValue();
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(id, age, height_feet, height_inch, weight);
+        return Objects.hash(id, age, height_feet, height_inch, weight, gender);
     }
 
     @Override
@@ -70,6 +81,6 @@ public class Characteristics {
             return false;
         }
         final Characteristics other = (Characteristics) obj;
-        return Objects.equals(this.id, other.id) && Objects.equals(this.age, other.age) && Objects.equals(this.height_feet, other.height_feet) && Objects.equals(this.height_inch, other.height_inch) && Objects.equals(this.weight, other.weight);
+        return Objects.equals(this.id, other.id) && Objects.equals(this.age, other.age) && Objects.equals(this.height_feet, other.height_feet) && Objects.equals(this.height_inch, other.height_inch) && Objects.equals(this.weight, other.weight) && Objects.equals(this.gender, other.gender);
     }
 }
