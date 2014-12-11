@@ -22,7 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 public class BlogEntryControllerTest {
-    @InjectMocks
+
+    @InjectMocks  // inject concrete implementation into controller variable
     private BlogEntryController controller;
 
     @Mock

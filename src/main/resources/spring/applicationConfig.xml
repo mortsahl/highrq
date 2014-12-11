@@ -16,10 +16,10 @@
     <context:component-scan base-package="highrq.core.repositories.jpa"/>
 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-        <property name="username" value="sa"/>
-        <property name="password" value="sa"/>
-        <property name="url" value="jdbc:h2:mem:test"/>
-        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="username" value="root"/>
+        <property name="password" value="admin"/>
+        <property name="url" value="jdbc:mysql://localhost/highrq"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
