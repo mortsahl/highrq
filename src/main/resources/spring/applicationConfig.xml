@@ -36,6 +36,8 @@
         <property name="packagesToScan" value="highrq.core.models.entities"/>
     </bean>
 
+    <context:property-placeholder location="classpath:db.properties" />
+
     <tx:annotation-driven/>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>
