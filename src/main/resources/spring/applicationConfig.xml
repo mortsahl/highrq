@@ -16,11 +16,11 @@
     <!-- Enable AspectJ style of Spring AOP -->
     <aop:aspectj-autoproxy />
 
-    <context:component-scan base-package="com.highrq.core"/>
+    <context:component-scan base-package="com.highrq"/>
 
-    <!-- Configure Aspect Beans, without this Aspects advices won't execute -->
+    <!-- Configure Aspect Beans, without this Aspects advices won't execute
     <bean name="loggingAspect" class="com.highrq.aspect.LoggingAspect" />
-
+-->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="username" value="${dbuser}"/>
         <property name="password" value="${dbpassword}"/>
@@ -36,7 +36,7 @@
         <property name="jpaProperties">
             <map>
                 <entry key="hibernate.hbm2ddl.auto" value="create-drop"/>
-                <entry key="hibernate.show_sql" value="true"/>
+                <entry key="hibernate.show_sql" value="false"/>
             </map>
         </property>
         <property name="packagesToScan" value="com.highrq.core.models.entities"/>
