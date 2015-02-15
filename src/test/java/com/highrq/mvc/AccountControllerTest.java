@@ -1,6 +1,6 @@
 package com.highrq.mvc;
 
-import com.highrq.api.controllers.AccountController;
+import com.highrq.api.controllers.impl.AccountControllerImpl;
 import com.highrq.core.models.entities.Account;
 import com.highrq.core.models.entities.Blog;
 import com.highrq.core.models.entities.enums.Role;
@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class AccountControllerTest {
     @InjectMocks
-    private AccountController controller;
+    private AccountControllerImpl controller;
 
     @Mock
     private AccountService service;

@@ -1,6 +1,6 @@
 package com.highrq.api.resources.assemblers;
 
-import com.highrq.api.controllers.PhoneController;
+import com.highrq.api.controllers.impl.PhoneControllerImpl;
 import com.highrq.api.resources.PhoneResource;
 import com.highrq.core.models.entities.Phone;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
@@ -13,7 +13,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class PhoneResourceAssembler extends ResourceAssemblerSupport<Phone, PhoneResource> {
 
     public PhoneResourceAssembler() {
-        super(PhoneController.class, PhoneResource.class);
+        super(PhoneControllerImpl.class, PhoneResource.class);
     }
 
     @Override
@@ -26,8 +26,8 @@ public class PhoneResourceAssembler extends ResourceAssemblerSupport<Phone, Phon
         phoneResource.setType(phone.getType());
 
         //  Link link =
-        linkTo(PhoneController.class).slash(phone.getId()).withSelfRel();
-        phoneResource.add(linkTo(methodOn(PhoneController.class).getPhone(phone.getId())).withSelfRel());
+        linkTo(PhoneControllerImpl.class).slash(phone.getId()).withSelfRel();
+        phoneResource.add(linkTo(methodOn(PhoneControllerImpl.class).getPhone(phone.getId())).withSelfRel());
 
         return phoneResource;
     }

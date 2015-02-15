@@ -1,7 +1,7 @@
 package com.highrq.api.resources.assemblers;
 
 import com.highrq.core.services.util.AccountList;
-import com.highrq.api.controllers.AccountController;
+import com.highrq.api.controllers.impl.AccountControllerImpl;
 import com.highrq.api.resources.AccountListResource;
 import com.highrq.api.resources.AccountResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
@@ -13,7 +13,7 @@ import java.util.List;
 public class AccountListResourceAssembler extends ResourceAssemblerSupport<AccountList, AccountListResource> {
 
     public AccountListResourceAssembler() {
-        super(AccountController.class, AccountListResource.class);
+        super(AccountControllerImpl.class, AccountListResource.class);
     }
 
     @Override

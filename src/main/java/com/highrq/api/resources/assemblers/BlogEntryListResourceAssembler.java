@@ -1,7 +1,7 @@
 package com.highrq.api.resources.assemblers;
 
 import com.highrq.core.services.util.BlogEntryList;
-import com.highrq.api.controllers.BlogController;
+import com.highrq.api.controllers.impl.BlogControllerImpl;
 import com.highrq.api.resources.BlogEntryListResource;
 import com.highrq.api.resources.BlogEntryResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
@@ -14,7 +14,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 @Component
 public class BlogEntryListResourceAssembler extends ResourceAssemblerSupport<BlogEntryList, BlogEntryListResource> {
     public BlogEntryListResourceAssembler() {
-        super(BlogController.class, BlogEntryListResource.class);
+        super(BlogControllerImpl.class, BlogEntryListResource.class);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class BlogEntryListResourceAssembler extends ResourceAssemblerSupport<Blo
         List<BlogEntryResource> resources = new BlogEntryResourceAssembler().toResources(list.getEntries());
         BlogEntryListResource blogEntryListResource = new BlogEntryListResource();
         blogEntryListResource.setEntries(resources);
-        blogEntryListResource.add(linkTo(methodOn(BlogController.class).findAllBlogEntries(list.getBlogId())).withSelfRel());
+        blogEntryListResource.add(linkTo(methodOn(BlogControllerImpl.class).findAllBlogEntries(list.getBlogId())).withSelfRel());
         return blogEntryListResource;
     }
 }

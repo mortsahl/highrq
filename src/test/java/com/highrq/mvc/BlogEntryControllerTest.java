@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.highrq.core.models.entities.Blog;
 import com.highrq.core.models.entities.BlogEntry;
 import com.highrq.core.services.BlogEntryService;
-import com.highrq.api.controllers.BlogEntryController;
+import com.highrq.api.controllers.impl.BlogEntryControllerImpl;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Matchers.any;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BlogEntryControllerTest {
 
     @InjectMocks  // inject concrete implementation into controller variable
-    private BlogEntryController controller;
+    private BlogEntryControllerImpl controller;
 
     @Mock
     private BlogEntryService service;

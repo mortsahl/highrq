@@ -5,7 +5,7 @@ import com.highrq.core.models.entities.enums.PhoneType;
 import com.highrq.core.services.AccountService;
 import com.highrq.core.services.PhoneService;
 import com.highrq.core.services.exceptions.PhoneExistsException;
-import com.highrq.api.controllers.PhoneController;
+import com.highrq.api.controllers.impl.PhoneControllerImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PhoneControllerTest {
 
     @InjectMocks
-    private PhoneController controller;
+    private PhoneControllerImpl controller;
 
     @Mock
     private PhoneService service;

@@ -3,7 +3,7 @@ package com.highrq.api.resources.assemblers;
 import com.highrq.api.resources.BlogListResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import com.highrq.core.services.util.BlogList;
-import com.highrq.api.controllers.BlogController;
+import com.highrq.api.controllers.impl.BlogControllerImpl;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,7 +11,7 @@ public class BlogListResourceAssembler extends ResourceAssemblerSupport<BlogList
 
     public BlogListResourceAssembler()
     {
-        super(BlogController.class, BlogListResource.class);
+        super(BlogControllerImpl.class, BlogListResource.class);
     }
 
     @Override

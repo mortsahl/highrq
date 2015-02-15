@@ -1,7 +1,7 @@
 package com.highrq.api.resources.assemblers;
 
 import com.highrq.core.services.util.PhoneList;
-import com.highrq.api.controllers.PhoneController;
+import com.highrq.api.controllers.impl.PhoneControllerImpl;
 import com.highrq.api.resources.PhoneListResource;
 import com.highrq.api.resources.PhoneResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
@@ -13,7 +13,7 @@ import java.util.List;
 public class PhoneListResourceAssembler extends ResourceAssemblerSupport<PhoneList, PhoneListResource> {
 
     public PhoneListResourceAssembler() {
-        super(PhoneController.class, PhoneListResource.class);
+        super(PhoneControllerImpl.class, PhoneListResource.class);
     }
 
     @Override

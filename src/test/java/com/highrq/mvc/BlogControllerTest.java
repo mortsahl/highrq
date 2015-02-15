@@ -7,7 +7,7 @@ import com.highrq.core.services.BlogService;
 import com.highrq.core.services.exceptions.BlogNotFoundException;
 import com.highrq.core.services.util.BlogEntryList;
 import com.highrq.core.services.util.BlogList;
-import com.highrq.api.controllers.BlogController;
+import com.highrq.api.controllers.impl.BlogControllerImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class BlogControllerTest {
     @InjectMocks
-    private BlogController controller;
+    private BlogControllerImpl controller;
 
     @Mock
     private BlogService blogService;

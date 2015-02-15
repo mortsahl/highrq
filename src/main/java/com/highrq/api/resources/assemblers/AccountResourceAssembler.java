@@ -1,6 +1,6 @@
 package com.highrq.api.resources.assemblers;
 
-import com.highrq.api.controllers.AccountController;
+import com.highrq.api.controllers.impl.AccountControllerImpl;
 import com.highrq.api.resources.AccountResource;
 import com.highrq.core.models.entities.Account;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
@@ -12,7 +12,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @Component
 public class AccountResourceAssembler extends ResourceAssemblerSupport<Account, AccountResource> {
     public AccountResourceAssembler() {
-        super(AccountController.class, AccountResource.class);
+        super(AccountControllerImpl.class, AccountResource.class);
     }
 
     @Override
@@ -25,8 +25,8 @@ public class AccountResourceAssembler extends ResourceAssemblerSupport<Account, 
         resource.setRole((account.getRole()));
         resource.setPhones(account.getPhones());
         resource.setAddress(account.getAddress());
-        resource.add(linkTo(methodOn(AccountController.class).getAccount(account.getId())).withSelfRel());
-        resource.add(linkTo(methodOn(AccountController.class).findAllBlogs(account.getId())).withRel("blogs"));
+        resource.add(linkTo(methodOn(AccountControllerImpl.class).getAccount(account.getId())).withSelfRel());
+        resource.add(linkTo(methodOn(AccountControllerImpl.class).findAllBlogs(account.getId())).withRel("blogs"));
 
         // TODO - sja: add phones here?
 
